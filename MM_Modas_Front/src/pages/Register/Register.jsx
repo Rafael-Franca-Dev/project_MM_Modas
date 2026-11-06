@@ -1,20 +1,16 @@
 // =========================================================
-// Register — página de Login, Cadastro e Minha Conta (/cadastro)
-// ---------------------------------------------------------
-// Correções estruturais aplicadas:
-//  - Adicionada aba de Login para que usuários já cadastrados
-//    possam sair (logout) e entrar novamente sem perder a conta.
-//  - Desacoplado do CartContext para notificações (usa useToast).
-//  - Usa o componente reutilizável <FormField />.
-//  - Controle de concorrência (requestId) na busca do ViaCEP.
+// Register — Login, Cadastro, Minha Conta e Painel da Equipe (/cadastro)
 // =========================================================
-import { useRef, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Mascot from '../../components/Logo/Mascot.jsx'
+import ProductArt from '../../components/ProductArt/ProductArt.jsx'
 import FormField from '../../components/FormField/FormField.jsx'
 import { useUser } from '../../context/UserContext.jsx'
 import { useCart } from '../../context/CartContext.jsx'
+import { useCatalog } from '../../context/CatalogContext.jsx'
 import { useToast } from '../../context/ToastContext.jsx'
+import { formatPrice } from '../../utils/format.js'
 import {
   maskCep,
   maskCpf,
@@ -25,6 +21,7 @@ import {
   isCpf,
   isPhone,
   isMatricula,
+  analyzePassword,
   fetchAddressByCep,
   UFS,
 } from '../../utils/validators.js'
@@ -37,7 +34,6 @@ const initialForm = {
   cpf: '',
   telefone: '',
   matricula: '',
-  cargo: 'Atendimento',
   cep: '',
   endereco: '',
   numero: '',
@@ -50,7 +46,23 @@ const initialForm = {
   termos: false,
 }
 
-const cargos = ['Atendimento', 'Curadoria de Jogos', 'Estoque', 'Mestre de Mesa / Eventos', 'Administrativo']
+const CATEGORY_ART_OPTIONS = [
+  { value: 'd20', label: 'Dado D20' },
+  { value: 'board', label: 'Tabuleiro' },
+  { value: 'chess', label: 'Estratégia / Xadrez' },
+  { value: 'cards', label: 'Cartas / TCG' },
+  { value: 'meeple', label: 'Meeple / Party' },
+  { value: 'tower', label: 'Torre de Dados' },
+  { value: 'rpgbook', label: 'Livro de RPG' },
+  { value: 'shield', label: 'Escudo do Mestre' },
+]
+
+const CATEGORY_BG_OPTIONS = [
+  { value: 'var(--laranja-200)', label: 'Laranja Solar' },
+  { value: 'var(--roxo-200)', label: 'Lavanda Arcana' },
+  { value: 'var(--laranja-100)', label: 'Pêssego Suave' },
+  { value: 'var(--roxo-100)', label: 'Lilás Místico' },
+]
 
 function validateRegister(form) {
   const err = {}
@@ -67,15 +79,172 @@ function validateRegister(form) {
   if (!form.bairro.trim()) err.bairro = 'Informe o bairro.'
   if (!form.cidade.trim()) err.cidade = 'Informe a cidade.'
   if (!form.uf) err.uf = 'Escolha o estado.'
-  if (form.senha.length < 6) err.senha = 'Mínimo de 6 caracteres.'
+
+  const pwdCheck = analyzePassword(form.senha)
+  if (!pwdCheck.valid) {
+    err.senha = pwdCheck.errorMessage
+  }
   if (form.confirmarSenha !== form.senha) err.confirmarSenha = 'As senhas não conferem.'
   if (!form.termos) err.termos = 'Você precisa aceitar os termos.'
   return err
 }
 
+function StaffProductRow({ product, categories, onSave, showToast }) {
+  const initialBasePrice = product.oldPrice && product.oldPrice > product.price ? product.oldPrice : product.price
+  const initialDiscountPct =
+    product.oldPrice && product.oldPrice > product.price
+      ? Math.round((1 - product.price / product.oldPrice) * 100)
+      : 0
+
+  const [basePrice, setBasePrice] = useState(String(initialBasePrice.toFixed(2)))
+  const [discountPct, setDiscountPct] = useState(String(initialDiscountPct))
+  const [stock, setStock] = useState(String(product.stock ?? 15))
+  const [category, setCategory] = useState(product.category)
+  const [saving, setSaving] = useState(false)
+
+  const numericBase = Math.max(0, Number(String(basePrice).replace(',', '.')) || 0)
+  const numericDiscount = Math.min(90, Math.max(0, Number(discountPct) || 0))
+  const finalPrice =
+    numericDiscount > 0
+      ? Number((numericBase * (1 - numericDiscount / 100)).toFixed(2))
+      : Number(numericBase.toFixed(2))
+
+  const handleSave = async (e) => {
+    e.preventDefault()
+    if (numericBase <= 0) {
+      showToast('Informe um valor base maior que zero.')
+      return
+    }
+    setSaving(true)
+    try {
+      await onSave(product.slug, {
+        price: finalPrice,
+        oldPrice: numericDiscount > 0 ? numericBase : null,
+        stock: Math.max(0, Math.floor(Number(stock) || 0)),
+        category,
+      })
+      showToast(`"${product.name}" atualizado com sucesso!`)
+    } catch (err) {
+      showToast(err.message || 'Erro ao atualizar produto.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  return (
+    <form className="staff-product" onSubmit={handleSave}>
+      <div className="staff-product__header">
+        <ProductArt
+          type={product.type}
+          color={product.colors?.[0]?.hex || '#c8b3f0'}
+          image={product.image}
+          bg="var(--roxo-100)"
+          className="staff-product__thumb"
+        />
+        <div className="staff-product__meta">
+          <Link to={`/produto/${product.slug}`} className="staff-product__title">
+            {product.name}
+          </Link>
+          <span className="muted staff-product__price-preview">
+            Preço na vitrine: <strong>{formatPrice(finalPrice)}</strong>
+            {numericDiscount > 0 && (
+              <>
+                {' '}
+                <s>{formatPrice(numericBase)}</s>{' '}
+                <span className="tag tag--roxo">-{numericDiscount}%</span>
+              </>
+            )}
+          </span>
+        </div>
+      </div>
+
+      <div className="staff-product__fields">
+        <div className="field">
+          <label htmlFor={`cat-${product.slug}`}>Categoria</label>
+          <select
+            id={`cat-${product.slug}`}
+            className="input"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {categories.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="field">
+          <label htmlFor={`price-${product.slug}`}>Valor Base (R$)</label>
+          <input
+            id={`price-${product.slug}`}
+            type="number"
+            step="0.10"
+            min="0.01"
+            className="input"
+            value={basePrice}
+            onChange={(e) => setBasePrice(e.target.value)}
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor={`disc-${product.slug}`}>Desconto (%)</label>
+          <input
+            id={`disc-${product.slug}`}
+            type="number"
+            step="1"
+            min="0"
+            max="90"
+            className="input"
+            value={discountPct}
+            onChange={(e) => setDiscountPct(e.target.value)}
+          />
+        </div>
+
+        <div className="field">
+          <label htmlFor={`stock-${product.slug}`}>Estoque (un.)</label>
+          <div className="staff-stock-control">
+            <button
+              type="button"
+              className="staff-stock-btn"
+              onClick={() => setStock((s) => String(Math.max(0, (Number(s) || 0) - 1)))}
+              aria-label="Diminuir estoque"
+            >
+              −
+            </button>
+            <input
+              id={`stock-${product.slug}`}
+              type="number"
+              step="1"
+              min="0"
+              className="input"
+              value={stock}
+              onChange={(e) => setStock(e.target.value)}
+            />
+            <button
+              type="button"
+              className="staff-stock-btn"
+              onClick={() => setStock((s) => String(Math.max(0, (Number(s) || 0) + 1)))}
+              aria-label="Aumentar estoque"
+            >
+              +
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" className="btn btn--primary staff-product__save" disabled={saving}>
+          {saving ? 'Salvando…' : 'Salvar'}
+        </button>
+      </div>
+    </form>
+  )
+}
+
 function Register() {
   const { user, register, login, logout } = useUser()
   const { count } = useCart()
+  const { categories, products, addCategory, updateProductCommercial } = useCatalog()
   const { showToast } = useToast()
   const navigate = useNavigate()
   const location = useLocation()
@@ -91,14 +260,52 @@ function Register() {
   const [submitting, setSubmitting] = useState(false)
   const [cepStatus, setCepStatus] = useState(null)
 
-  // ---------- Usuário autenticado: exibe "Minha conta" ----------
+  // Estados do Painel da Equipe
+  const [newCatName, setNewCatName] = useState('')
+  const [newCatArt, setNewCatArt] = useState('d20')
+  const [newCatBg, setNewCatBg] = useState('var(--laranja-200)')
+  const [catError, setCatError] = useState('')
+  const [staffSearch, setStaffSearch] = useState('')
+  const [staffCatFilter, setStaffCatFilter] = useState('todas')
+
+  const passwordAnalysis = useMemo(() => analyzePassword(form.senha), [form.senha])
+
+  const filteredStaffProducts = useMemo(() => {
+    return products.filter((p) => {
+      const matchCat = staffCatFilter === 'todas' || p.category === staffCatFilter
+      const matchQuery = p.name.toLowerCase().includes(staffSearch.trim().toLowerCase())
+      return matchCat && matchQuery
+    })
+  }, [products, staffCatFilter, staffSearch])
+
+  const handleAddCategory = async (e) => {
+    e.preventDefault()
+    setCatError('')
+    try {
+      const created = await addCategory({
+        name: newCatName,
+        art: newCatArt,
+        bg: newCatBg,
+      })
+      setNewCatName('')
+      showToast(`Categoria "${created.name}" adicionada ao site!`)
+    } catch (err) {
+      setCatError(err.message || 'Não foi possível criar a categoria.')
+    }
+  }
+
+  // ---------- Usuário autenticado: exibe "Minha conta" (+ Painel da Equipe se funcionário) ----------
   if (user) {
     return (
       <div className="container">
         <header className="page-head">
           <span className="eyebrow">{user.tipo === 'funcionario' ? 'Conta da equipe MM' : 'Conta de jogador'}</span>
           <h1>Olá, {user.nome.split(' ')[0]}!</h1>
-          <p className="muted">Sua conta está ativa e pronta para a próxima campanha.</p>
+          <p className="muted">
+            {user.tipo === 'funcionario'
+              ? 'Gerencie categorias, valores, descontos e estoque diretamente pelo painel da equipe.'
+              : 'Sua conta está ativa e pronta para a próxima campanha.'}
+          </p>
         </header>
 
         <div className="account">
@@ -109,11 +316,8 @@ function Register() {
               <div><dt>E-mail</dt><dd>{user.email}</dd></div>
               {user.cpf && <div><dt>CPF</dt><dd>{user.cpf}</dd></div>}
               {user.telefone && <div><dt>Telefone</dt><dd>{user.telefone}</dd></div>}
-              {user.tipo === 'funcionario' && (
-                <>
-                  {user.matricula && <div><dt>Matrícula</dt><dd>{user.matricula}</dd></div>}
-                  {user.cargo && <div><dt>Cargo</dt><dd>{user.cargo}</dd></div>}
-                </>
+              {user.tipo === 'funcionario' && user.matricula && (
+                <div><dt>Matrícula</dt><dd>{user.matricula}</dd></div>
               )}
               {user.endereco && (
                 <div className="account__full">
@@ -150,6 +354,132 @@ function Register() {
             </button>
           </aside>
         </div>
+
+        {/* ---------- PAINEL DE GESTÃO DA EQUIPE ---------- */}
+        {user.tipo === 'funcionario' && (
+          <section className="staff-panel" aria-label="Painel de Gestão da Equipe">
+            <div className="staff-panel__head">
+              <span className="eyebrow">Acesso exclusivo · Matrícula {user.matricula || 'ATIVA'}</span>
+              <h2>Painel de Gestão da Equipe</h2>
+              <p className="muted">
+                Adicione novas categorias à loja e ajuste valores, descontos promocionais e estoque em tempo real.
+              </p>
+            </div>
+
+            {/* 1. Adicionar nova categoria */}
+            <div className="staff-card">
+              <h3>1. Adicionar Nova Categoria ao Site</h3>
+              <form className="staff-category-form" onSubmit={handleAddCategory}>
+                <FormField
+                  id="staff-cat-name"
+                  name="newCatName"
+                  label="Nome da nova categoria"
+                  value={newCatName}
+                  onChange={(e) => {
+                    setNewCatName(e.target.value)
+                    setCatError('')
+                  }}
+                  error={catError}
+                  inputProps={{ placeholder: 'Ex.: Miniaturas & Pintura' }}
+                />
+
+                <div className="field">
+                  <label htmlFor="staff-cat-art">Ícone da categoria</label>
+                  <select
+                    id="staff-cat-art"
+                    className="input"
+                    value={newCatArt}
+                    onChange={(e) => setNewCatArt(e.target.value)}
+                  >
+                    {CATEGORY_ART_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="field">
+                  <label htmlFor="staff-cat-bg">Cor do card</label>
+                  <select
+                    id="staff-cat-bg"
+                    className="input"
+                    value={newCatBg}
+                    onChange={(e) => setNewCatBg(e.target.value)}
+                  >
+                    {CATEGORY_BG_OPTIONS.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <button type="submit" className="btn btn--primary staff-category-form__btn">
+                  + Criar categoria
+                </button>
+              </form>
+
+              <div className="staff-category-list">
+                {categories.map((c) => {
+                  const totalItens = products.filter((p) => p.category === c.id).length
+                  return (
+                    <span key={c.id} className="staff-category-pill" style={{ background: c.bg }}>
+                      <strong>{c.name}</strong>
+                      <small>{totalItens} {totalItens === 1 ? 'item' : 'itens'}</small>
+                    </span>
+                  )
+                })}
+              </div>
+            </div>
+
+            {/* 2. Alterar Valores, Descontos e Estoque */}
+            <div className="staff-card">
+              <div className="staff-products-head">
+                <div>
+                  <h3>2. Gerenciar Valores, Descontos e Estoque</h3>
+                  <p className="muted">
+                    Altere o valor base, aplique desconto em porcentagem (%) ou ajuste o saldo de estoque de cada item.
+                  </p>
+                </div>
+
+                <div className="staff-products-filters">
+                  <input
+                    type="search"
+                    className="input"
+                    placeholder="Buscar produto pelo nome..."
+                    value={staffSearch}
+                    onChange={(e) => setStaffSearch(e.target.value)}
+                  />
+                  <select
+                    className="input"
+                    value={staffCatFilter}
+                    onChange={(e) => setStaffCatFilter(e.target.value)}
+                  >
+                    <option value="todas">Todas as categorias</option>
+                    {categories.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="staff-products-list">
+                {filteredStaffProducts.map((product) => (
+                  <StaffProductRow
+                    key={`${product.slug}-${product.price}-${product.oldPrice}-${product.stock}-${product.category}`}
+                    product={product}
+                    categories={categories}
+                    onSave={updateProductCommercial}
+                    showToast={showToast}
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     )
   }
@@ -203,7 +533,6 @@ function Register() {
     const data = { ...form }
     if (data.tipo === 'cliente') {
       delete data.matricula
-      delete data.cargo
     }
 
     setSubmitting(true)
@@ -397,26 +726,16 @@ function Register() {
             {isStaff && (
               <div className="register__staff">
                 <h2>Dados da equipe</h2>
-                <div className="register__row">
-                  <FormField
-                    id="reg-matricula"
-                    name="matricula"
-                    label="Matrícula"
-                    value={form.matricula}
-                    onChange={handleChange}
-                    error={errors.matricula}
-                    hint={`${form.matricula.length}/8 caracteres`}
-                    inputProps={{ maxLength: 8, placeholder: 'Ex.: MM2026A1' }}
-                  />
-                  <div className="field">
-                    <label htmlFor="reg-cargo">Setor</label>
-                    <select id="reg-cargo" name="cargo" className="input" value={form.cargo} onChange={handleChange}>
-                      {cargos.map((c) => (
-                        <option key={c}>{c}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
+                <FormField
+                  id="reg-matricula"
+                  name="matricula"
+                  label="Matrícula"
+                  value={form.matricula}
+                  onChange={handleChange}
+                  error={errors.matricula}
+                  hint={`${form.matricula.length}/8 caracteres`}
+                  inputProps={{ maxLength: 8, placeholder: 'Ex.: MM2026A1' }}
+                />
               </div>
             )}
 
@@ -524,6 +843,42 @@ function Register() {
               />
             </div>
 
+            {/* Dificultador de Senhas — Validador em tempo real */}
+            <div className="password-rules" aria-live="polite">
+              <strong className="password-rules__title">Requisitos obrigatórios da senha:</strong>
+              <ul className="password-rules__list">
+                <li className={passwordAnalysis.rules.minLength ? 'rule--ok' : 'rule--pending'}>
+                  <span>{passwordAnalysis.rules.minLength ? '✓' : '○'}</span> Mais de 8 caracteres (mínimo de 9)
+                </li>
+                <li className={passwordAnalysis.rules.hasUpper ? 'rule--ok' : 'rule--pending'}>
+                  <span>{passwordAnalysis.rules.hasUpper ? '✓' : '○'}</span> Pelo menos 1 letra maiúscula (A–Z)
+                </li>
+                <li className={passwordAnalysis.rules.hasLower ? 'rule--ok' : 'rule--pending'}>
+                  <span>{passwordAnalysis.rules.hasLower ? '✓' : '○'}</span> Pelo menos 1 letra minúscula (a–z)
+                </li>
+                <li className={passwordAnalysis.rules.hasSpecial ? 'rule--ok' : 'rule--pending'}>
+                  <span>{passwordAnalysis.rules.hasSpecial ? '✓' : '○'}</span> Pelo menos 1 caractere especial (ex.: @, #, !, $)
+                </li>
+                <li
+                  className={
+                    !form.senha
+                      ? 'rule--pending'
+                      : passwordAnalysis.rules.noBirthday
+                        ? 'rule--ok'
+                        : 'rule--blocked'
+                  }
+                >
+                  <span>
+                    {!form.senha ? '○' : passwordAnalysis.rules.noBirthday ? '✓' : '✕'}
+                  </span>{' '}
+                  Sem sequências de data/aniversário (ex.: 221206 = 22/12/2006)
+                  {passwordAnalysis.birthdayMatch && (
+                    <strong> — detectado: {passwordAnalysis.birthdayMatch}</strong>
+                  )}
+                </li>
+              </ul>
+            </div>
+
             <label className="register__terms">
               <input type="checkbox" name="termos" checked={form.termos} onChange={handleChange} />
               Li e aceito os termos de uso e a política de privacidade.
@@ -536,7 +891,11 @@ function Register() {
               </p>
             )}
 
-            <button type="submit" className="btn btn--primary btn--block register__submit" disabled={submitting}>
+            <button
+              type="submit"
+              className="btn btn--primary btn--block register__submit"
+              disabled={submitting || (form.senha.length > 0 && !passwordAnalysis.valid)}
+            >
               {submitting ? 'Salvando…' : isStaff ? 'Cadastrar membro da equipe' : 'Criar minha conta'}
             </button>
           </form>
@@ -547,9 +906,9 @@ function Register() {
           <h2>{isStaff ? 'Bem-vindo à equipe!' : 'Vantagens da guilda'}</h2>
           {isStaff ? (
             <ul>
-              <li>Acesso com sua matrícula</li>
-              <li>Desconto de colaborador nos jogos</li>
-              <li>Acompanhe os pedidos da loja</li>
+              <li>Acesso exclusivo com sua matrícula</li>
+              <li>Adicione novas categorias pelo site</li>
+              <li>Altere valores, descontos e estoque</li>
             </ul>
           ) : (
             <ul>

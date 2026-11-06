@@ -17,7 +17,7 @@ public record RegistroRequest(
         String email,
 
         @NotBlank(message = "Senha e obrigatoria")
-        @Size(min = 6, max = 100, message = "A senha deve ter no minimo 6 caracteres")
+        @Size(min = 9, max = 100, message = "A senha deve ter mais de 8 caracteres")
         String senha,
 
         @Pattern(regexp = "^[0-9]{11}$", message = "CPF deve conter 11 digitos numericos")
@@ -25,6 +25,9 @@ public record RegistroRequest(
 
         @Size(max = 20)
         String telefone,
+
+        @Pattern(regexp = "^[A-Za-z0-9]{8}$", message = "A matricula deve conter exatamente 8 caracteres alfanumericos")
+        String matricula,
 
         @Valid
         EnderecoRequest endereco

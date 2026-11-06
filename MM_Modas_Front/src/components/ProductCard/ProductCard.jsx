@@ -16,9 +16,13 @@ const backgrounds = ['var(--roxo-100)', 'var(--laranja-100)', 'var(--roxo-200)',
 function ProductCard({ product }) {
   const bg = backgrounds[product.id % backgrounds.length]
   const isNew = product.tags.includes('novo')
+  const stock = typeof product.stock === 'number' ? product.stock : 15
+  const outOfStock = stock <= 0
 
   // Percentual de desconto quando existe preço antigo
-  const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : 0
+  const discount = product.oldPrice && product.oldPrice > product.price
+    ? Math.round((1 - product.price / product.oldPrice) * 100)
+    : 0
 
   return (
     <article className="product-card">
@@ -27,7 +31,11 @@ function ProductCard({ product }) {
         <div className="product-card__media">
           <ProductArt type={product.type} color={product.colors[0].hex} image={product.image} bg={bg} />
           <div className="product-card__tags">
-            {isNew && <span className="tag">Novo</span>}
+            {outOfStock ? (
+              <span className="tag" style={{ background: '#fee2e2', color: '#991b1b' }}>Esgotado</span>
+            ) : (
+              isNew && <span className="tag">Novo</span>
+            )}
             {discount > 0 && <span className="tag tag--roxo">-{discount}%</span>}
           </div>
         </div>
@@ -37,8 +45,13 @@ function ProductCard({ product }) {
           <h3 className="product-card__name">{product.name}</h3>
           <div className="product-card__prices">
             <span className="product-card__price">{formatPrice(product.price)}</span>
-            {product.oldPrice && <s className="product-card__old">{formatPrice(product.oldPrice)}</s>}
+            {product.oldPrice && product.oldPrice > product.price && (
+              <s className="product-card__old">{formatPrice(product.oldPrice)}</s>
+            )}
           </div>
+          <span className="muted" style={{ fontSize: '12px', display: 'block', marginTop: '4px' }}>
+            {outOfStock ? 'Sem estoque no momento' : `${stock} un. em estoque`}
+          </span>
         </div>
       </Link>
     </article>

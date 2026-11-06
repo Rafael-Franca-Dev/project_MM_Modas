@@ -4,13 +4,13 @@
 // Consome a API do Back-end (/api/produtos) com fallback
 // imediato para o catálogo local em data/products.js.
 // =========================================================
-import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useMemo, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import ProductCard from '../../components/ProductCard/ProductCard.jsx'
 import Mascot from '../../components/Logo/Mascot.jsx'
 import { SearchIcon } from '../../components/Icons.jsx'
-import { categories as defaultCategories, products as defaultProducts } from '../../data/products.js'
-import { apiFetchCatalog } from '../../services/api.js'
+import { useCatalog } from '../../context/CatalogContext.jsx'
+import { useUser } from '../../context/UserContext.jsx'
 import './Shop.css'
 
 const sortOptions = {
@@ -21,24 +21,13 @@ const sortOptions = {
 }
 
 function Shop() {
+  const { categories, products: catalogProducts } = useCatalog()
+  const { user } = useUser()
   const [searchParams, setSearchParams] = useSearchParams()
   const activeCategory = searchParams.get('categoria') ?? 'todas'
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState('relevancia')
   const [onlyPromo, setOnlyPromo] = useState(false)
-  const [catalogProducts, setCatalogProducts] = useState(defaultProducts)
-
-  useEffect(() => {
-    let active = true
-    apiFetchCatalog().then((res) => {
-      if (active && res?.products) {
-        setCatalogProducts(res.products)
-      }
-    })
-    return () => {
-      active = false
-    }
-  }, [])
 
   const selectCategory = (id) => {
     if (id === 'todas') setSearchParams({})
@@ -49,7 +38,7 @@ function Shop() {
     let list = catalogProducts.filter((p) => {
       const matchCategory = activeCategory === 'todas' || p.category === activeCategory
       const matchQuery = p.name.toLowerCase().includes(query.trim().toLowerCase())
-      const matchPromo = !onlyPromo || Boolean(p.oldPrice)
+      const matchPromo = !onlyPromo || Boolean(p.oldPrice && p.oldPrice > p.price)
       return matchCategory && matchQuery && matchPromo
     })
 
@@ -62,7 +51,7 @@ function Shop() {
   const title =
     activeCategory === 'todas'
       ? 'Todo o catálogo'
-      : (defaultCategories.find((c) => c.id === activeCategory)?.name ?? 'Catálogo')
+      : (categories.find((c) => c.id === activeCategory)?.name ?? 'Catálogo')
 
   return (
     <div className="container shop">
@@ -72,10 +61,17 @@ function Shop() {
         <p className="muted">
           {visible.length} {visible.length === 1 ? 'jogo encontrado' : 'jogos encontrados'}
         </p>
+        {user?.tipo === 'funcionario' && (
+          <p style={{ marginTop: '12px' }}>
+            <Link to="/cadastro" className="btn btn--accent">
+              Gerenciar Categorias, Valores, Descontos e Estoque (Equipe)
+            </Link>
+          </p>
+        )}
       </header>
 
       <div className="shop__chips" role="tablist" aria-label="Categorias">
-        {[{ id: 'todas', name: 'Todas' }, ...defaultCategories].map((c) => (
+        {[{ id: 'todas', name: 'Todas' }, ...categories].map((c) => (
           <button
             key={c.id}
             type="button"

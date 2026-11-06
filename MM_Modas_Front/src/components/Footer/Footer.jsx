@@ -4,11 +4,12 @@
 import { Link } from 'react-router-dom'
 import Logo from '../Logo/Logo.jsx'
 import { InstagramIcon, TiktokIcon, WhatsIcon } from '../Icons.jsx'
-import { categories } from '../../data/products.js'
+import { useCatalog } from '../../context/CatalogContext.jsx'
 import { faq } from '../../data/faq.js'
 import './Footer.css'
 
 function Footer() {
+  const { categories } = useCatalog()
   const year = new Date().getFullYear()
 
   return (

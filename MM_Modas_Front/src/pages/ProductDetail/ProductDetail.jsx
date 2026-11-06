@@ -11,7 +11,7 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import ProductArt from '../../components/ProductArt/ProductArt.jsx'
 import ProductCard from '../../components/ProductCard/ProductCard.jsx'
 import { BackIcon, TruckIcon, RefreshIcon } from '../../components/Icons.jsx'
-import { getProductBySlug, getCategoryName, products } from '../../data/products.js'
+import { useCatalog } from '../../context/CatalogContext.jsx'
 import { useCart } from '../../context/CartContext.jsx'
 import { formatPrice, installments } from '../../utils/format.js'
 import NotFound from '../NotFound/NotFound.jsx'
@@ -19,14 +19,16 @@ import './ProductDetail.css'
 
 function ProductDetail() {
   const { slug } = useParams()
+  const { getProductBySlug } = useCatalog()
   const product = getProductBySlug(slug)
 
   if (!product) return <NotFound />
 
-  return <ProductView key={slug} product={product} />
+  return <ProductView key={`${slug}-${product.price}-${product.oldPrice}-${product.stock}`} product={product} />
 }
 
 function ProductView({ product }) {
+  const { products, getCategoryName } = useCatalog()
   const { addItem } = useCart()
   const navigate = useNavigate()
   const location = useLocation()
@@ -35,6 +37,9 @@ function ProductView({ product }) {
     if (location.key !== 'default') navigate(-1)
     else navigate('/loja')
   }
+
+  const stock = typeof product.stock === 'number' ? product.stock : 15
+  const outOfStock = stock <= 0
 
   const [color, setColor] = useState(product.colors[0])
   const [size, setSize] = useState(product.sizes.length === 1 ? product.sizes[0] : null)
@@ -45,6 +50,7 @@ function ProductView({ product }) {
   const fallback = products.filter((p) => p.id !== product.id).slice(0, 4)
 
   const handleAdd = () => {
+    if (outOfStock) return
     if (!size) {
       setSizeError(true)
       return
@@ -60,7 +66,7 @@ function ProductView({ product }) {
       colorName: color.name,
       image: product.image,
       size,
-      qty,
+      qty: Math.min(qty, stock),
     })
   }
 
@@ -91,12 +97,15 @@ function ProductView({ product }) {
         <div className="pdp__info">
           <div className="pdp__tags">
             {product.tags.includes('novo') && <span className="tag">Destaque</span>}
+            <span className="tag" style={{ background: outOfStock ? '#fee2e2' : 'var(--roxo-100)', color: outOfStock ? '#991b1b' : 'var(--roxo-900)' }}>
+              {outOfStock ? 'Esgotado' : `${stock} un. disponíveis`}
+            </span>
           </div>
           <h1 className="pdp__name">{product.name}</h1>
 
           <div className="pdp__price">
             <strong>{formatPrice(product.price)}</strong>
-            {product.oldPrice && <s>{formatPrice(product.oldPrice)}</s>}
+            {product.oldPrice && product.oldPrice > product.price && <s>{formatPrice(product.oldPrice)}</s>}
           </div>
           <p className="muted pdp__installments">{installments(product.price)}</p>
 
@@ -149,16 +158,31 @@ function ProductView({ product }) {
 
           <div className="pdp__buy">
             <div className="qty" aria-label="Quantidade">
-              <button type="button" onClick={() => setQty((q) => Math.max(1, q - 1))} aria-label="Diminuir">
+              <button
+                type="button"
+                onClick={() => setQty((q) => Math.max(1, q - 1))}
+                aria-label="Diminuir"
+                disabled={outOfStock}
+              >
                 −
               </button>
-              <span>{qty}</span>
-              <button type="button" onClick={() => setQty((q) => q + 1)} aria-label="Aumentar">
+              <span>{outOfStock ? 0 : qty}</span>
+              <button
+                type="button"
+                onClick={() => setQty((q) => Math.min(stock, q + 1))}
+                aria-label="Aumentar"
+                disabled={outOfStock || qty >= stock}
+              >
                 +
               </button>
             </div>
-            <button type="button" className="btn btn--primary pdp__add" onClick={handleAdd}>
-              Adicionar ao carrinho
+            <button
+              type="button"
+              className="btn btn--primary pdp__add"
+              onClick={handleAdd}
+              disabled={outOfStock}
+            >
+              {outOfStock ? 'Produto esgotado' : 'Adicionar ao carrinho'}
             </button>
           </div>
 

@@ -13,6 +13,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { ToastProvider } from './context/ToastContext.jsx'
 import { UserProvider } from './context/UserContext.jsx'
+import { CatalogProvider } from './context/CatalogContext.jsx'
 import { CartProvider } from './context/CartContext.jsx'
 import App from './App.jsx'
 import './styles/global.css'
@@ -22,9 +23,11 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <ToastProvider>
         <UserProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
+          <CatalogProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </CatalogProvider>
         </UserProvider>
       </ToastProvider>
     </BrowserRouter>

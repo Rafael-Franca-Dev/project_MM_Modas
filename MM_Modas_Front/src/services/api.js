@@ -13,6 +13,9 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api'
 const TOKEN_KEY = 'mm-games:tokens'
 const LOCAL_ACCOUNTS_KEY = 'mm-games:contas-locais'
 const LOCAL_ORDERS_KEY = 'mm-games:pedidos-locais'
+const STAFF_MATRICULAS_KEY = 'mm-games:matriculas-equipe'
+const CUSTOM_CATEGORIES_KEY = 'mm-games:categorias-custom'
+const PRODUCT_OVERRIDES_KEY = 'mm-games:produtos-comercial'
 
 export function getSavedTokens() {
   try {
@@ -87,17 +90,38 @@ function saveLocalAccounts(accounts) {
   }
 }
 
+function loadStaffMatriculas() {
+  try {
+    const raw = localStorage.getItem(STAFF_MATRICULAS_KEY)
+    return raw ? JSON.parse(raw) : {}
+  } catch {
+    return {}
+  }
+}
+
+function saveStaffMatricula(email, matricula) {
+  if (!email || !matricula) return
+  try {
+    const map = loadStaffMatriculas()
+    map[email.trim().toLowerCase()] = matricula
+    localStorage.setItem(STAFF_MATRICULAS_KEY, JSON.stringify(map))
+  } catch {
+    /* sem armazenamento */
+  }
+}
+
 function normalizeBackendUser(usuario, extra = {}) {
   const end = usuario.enderecoPrincipal
+  const savedMatricula = loadStaffMatriculas()[usuario.email?.toLowerCase()]
+  const matricula = extra.matricula ?? savedMatricula
   return {
     id: usuario.id,
-    tipo: extra.tipo ?? (usuario.perfil === 'ADMIN' ? 'funcionario' : 'cliente'),
+    tipo: extra.tipo ?? (usuario.perfil === 'ADMIN' || matricula ? 'funcionario' : 'cliente'),
     nome: usuario.nome,
     email: usuario.email,
     cpf: usuario.cpf ?? extra.cpf ?? '',
     telefone: usuario.telefone ?? extra.telefone ?? '',
-    matricula: extra.matricula,
-    cargo: extra.cargo,
+    matricula,
     enderecoId: end?.id ?? null,
     cep: end?.cep ?? extra.cep ?? '',
     endereco: end?.logradouro ?? extra.endereco ?? '',
@@ -115,6 +139,11 @@ function normalizeBackendUser(usuario, extra = {}) {
 export async function apiRegister(formData) {
   const cpfDigits = onlyDigits(formData.cpf || '')
   const cepDigits = onlyDigits(formData.cep || '')
+  const isStaff = formData.tipo === 'funcionario'
+
+  if (isStaff && formData.matricula) {
+    saveStaffMatricula(formData.email, formData.matricula)
+  }
 
   const payload = {
     nome: formData.nome.trim(),
@@ -122,6 +151,7 @@ export async function apiRegister(formData) {
     senha: formData.senha,
     cpf: cpfDigits.length === 11 ? cpfDigits : null,
     telefone: formData.telefone,
+    matricula: isStaff ? formData.matricula : null,
     endereco: {
       apelido: 'Principal',
       destinatario: formData.nome.trim(),
@@ -234,6 +264,116 @@ export async function apiValidateCoupon(code) {
 }
 
 // ---------- Catálogo ----------
+const DEFAULT_ARTS = ['d20', 'board', 'chess', 'cards', 'meeple', 'tower', 'rpgbook', 'shield']
+const DEFAULT_BGS = ['var(--laranja-200)', 'var(--roxo-200)', 'var(--laranja-100)', 'var(--roxo-100)']
+
+export function slugifyCategory(text = '') {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
+export function loadCustomCategories() {
+  try {
+    const raw = localStorage.getItem(CUSTOM_CATEGORIES_KEY)
+    const parsed = raw ? JSON.parse(raw) : []
+    return Array.isArray(parsed) ? parsed : []
+  } catch {
+    return []
+  }
+}
+
+function saveCustomCategories(list) {
+  try {
+    localStorage.setItem(CUSTOM_CATEGORIES_KEY, JSON.stringify(list))
+  } catch {
+    /* sem armazenamento */
+  }
+}
+
+export function loadProductOverrides() {
+  try {
+    const raw = localStorage.getItem(PRODUCT_OVERRIDES_KEY)
+    const parsed = raw ? JSON.parse(raw) : {}
+    return parsed && typeof parsed === 'object' ? parsed : {}
+  } catch {
+    return {}
+  }
+}
+
+function saveProductOverrides(map) {
+  try {
+    localStorage.setItem(PRODUCT_OVERRIDES_KEY, JSON.stringify(map))
+  } catch {
+    /* sem armazenamento */
+  }
+}
+
+export function buildMergedCategories(apiCats = []) {
+  const custom = loadCustomCategories()
+  const merged = [...localCategories]
+  const seen = new Set(merged.map((c) => c.id))
+
+  for (const c of custom) {
+    if (c?.id && !seen.has(c.id)) {
+      merged.push(c)
+      seen.add(c.id)
+    }
+  }
+
+  if (Array.isArray(apiCats)) {
+    apiCats.forEach((ac, idx) => {
+      const slug = ac.slug || slugifyCategory(ac.nome)
+      if (slug && !seen.has(slug)) {
+        merged.push({
+          id: slug,
+          name: ac.nome,
+          art: DEFAULT_ARTS[idx % DEFAULT_ARTS.length],
+          bg: DEFAULT_BGS[idx % DEFAULT_BGS.length],
+        })
+        seen.add(slug)
+      }
+    })
+  }
+
+  return merged
+}
+
+export function buildMergedProducts(apiProds = []) {
+  const overrides = loadProductOverrides()
+
+  return localProducts.map((lp) => {
+    const match = Array.isArray(apiProds) ? apiProds.find((ap) => ap.slug === lp.slug) : null
+    const firstVar = match?.variacoes?.[0]
+    const ov = overrides[lp.slug]
+
+    const apiPrice = match ? Number(match.precoEfetivo ?? lp.price) : lp.price
+    const apiOldPrice = match
+      ? match.precoPromocional
+        ? Number(match.precoBase)
+        : null
+      : (lp.oldPrice ?? null)
+    const apiStock =
+      firstVar && typeof firstVar.disponivel === 'number'
+        ? firstVar.disponivel
+        : (lp.stock ?? 15)
+
+    return {
+      ...lp,
+      backendId: match?.id ?? lp.backendId,
+      variacaoId: firstVar?.id ?? lp.variacaoId,
+      category: ov?.category ?? lp.category,
+      price: ov?.price !== undefined ? Number(ov.price) : apiPrice,
+      oldPrice: ov?.oldPrice !== undefined ? (ov.oldPrice ? Number(ov.oldPrice) : null) : apiOldPrice,
+      stock: ov?.stock !== undefined ? Number(ov.stock) : apiStock,
+      image: match?.imagemPrincipal || lp.image,
+    }
+  })
+}
+
 export async function apiFetchCatalog() {
   try {
     const [apiCats, apiProds] = await Promise.all([
@@ -241,29 +381,98 @@ export async function apiFetchCatalog() {
       request('/produtos', { method: 'GET' }),
     ])
 
-    if (!Array.isArray(apiProds) || apiProds.length === 0) {
-      return { categories: localCategories, products: localProducts, source: 'local' }
+    return {
+      categories: buildMergedCategories(apiCats),
+      products: buildMergedProducts(apiProds),
+      source: 'api',
     }
-
-    // Mescla dados de estoque/preço vindos do banco com o catálogo visual do front
-    const mergedProducts = localProducts.map((lp) => {
-      const match = apiProds.find((ap) => ap.slug === lp.slug)
-      if (!match) return lp
-      const firstVar = match.variacoes?.[0]
-      return {
-        ...lp,
-        backendId: match.id,
-        variacaoId: firstVar?.id ?? lp.variacaoId,
-        price: Number(match.precoEfetivo ?? lp.price),
-        oldPrice: match.precoPromocional ? Number(match.precoBase) : lp.oldPrice,
-        image: match.imagemPrincipal || lp.image,
-      }
-    })
-
-    return { categories: localCategories, products: mergedProducts, source: 'api', apiCategories: apiCats }
   } catch {
-    return { categories: localCategories, products: localProducts, source: 'local' }
+    return {
+      categories: buildMergedCategories([]),
+      products: buildMergedProducts([]),
+      source: 'local',
+    }
   }
+}
+
+export async function apiCreateCategory({ name, art = 'd20', bg = 'var(--laranja-200)' }) {
+  const cleanName = (name || '').trim()
+  const slug = slugifyCategory(cleanName)
+  if (!cleanName || !slug) {
+    throw new Error('Informe um nome válido para a nova categoria.')
+  }
+
+  const currentCats = buildMergedCategories([])
+  if (currentCats.some((c) => c.id === slug || c.name.toLowerCase() === cleanName.toLowerCase())) {
+    throw new Error('Já existe uma categoria cadastrada com este nome.')
+  }
+
+  const newCat = { id: slug, name: cleanName, art, bg }
+
+  // Tenta criar também no Back-end quando autenticado
+  const tokens = getSavedTokens()
+  if (tokens?.accessToken) {
+    try {
+      await request('/categorias', {
+        method: 'POST',
+        body: JSON.stringify({ nome: cleanName, slug }),
+      })
+    } catch (err) {
+      if (err.status === 409) {
+        throw new Error('Já existe uma categoria cadastrada com este identificador.')
+      }
+      /* Se o servidor estiver offline ou sem sessão API, salva localmente */
+    }
+  }
+
+  const custom = loadCustomCategories()
+  saveCustomCategories([...custom.filter((c) => c.id !== slug), newCat])
+  return newCat
+}
+
+export async function apiUpdateProductCommercial(slug, { price, oldPrice, stock, category }) {
+  const numericPrice = Number(price)
+  const numericOldPrice = oldPrice ? Number(oldPrice) : null
+  const numericStock = Math.max(0, Math.floor(Number(stock ?? 0)))
+
+  if (!Number.isFinite(numericPrice) || numericPrice <= 0) {
+    throw new Error('O valor do produto deve ser maior que zero.')
+  }
+  if (numericOldPrice !== null && (!Number.isFinite(numericOldPrice) || numericOldPrice <= numericPrice)) {
+    throw new Error('O valor original (sem desconto) deve ser maior que o valor final com desconto.')
+  }
+
+  // No back-end: precoBase é o preço cheio e precoPromocional é o preço com desconto
+  const precoBase = numericOldPrice ?? numericPrice
+  const precoPromocional = numericOldPrice ? numericPrice : null
+
+  const tokens = getSavedTokens()
+  if (tokens?.accessToken) {
+    try {
+      await request(`/produtos/${encodeURIComponent(slug)}/comercial`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          precoBase,
+          precoPromocional,
+          estoque: numericStock,
+        }),
+      })
+    } catch {
+      /* Segue com persistência local se o produto for apenas do seed front ou API offline */
+    }
+  }
+
+  const overrides = loadProductOverrides()
+  overrides[slug] = {
+    ...(overrides[slug] || {}),
+    price: Number(numericPrice.toFixed(2)),
+    oldPrice: numericOldPrice ? Number(numericOldPrice.toFixed(2)) : null,
+    stock: numericStock,
+    ...(category ? { category } : {}),
+    updatedAt: new Date().toISOString(),
+  }
+  saveProductOverrides(overrides)
+  return overrides[slug]
 }
 
 // ---------- Pedidos (Checkout) ----------

@@ -7,7 +7,7 @@ import Mascot from '../../components/Logo/Mascot.jsx'
 import ProductArt from '../../components/ProductArt/ProductArt.jsx'
 import ProductCard from '../../components/ProductCard/ProductCard.jsx'
 import { ArrowIcon, TruckIcon, RefreshIcon, LeafIcon } from '../../components/Icons.jsx'
-import { categories, products } from '../../data/products.js'
+import { useCatalog } from '../../context/CatalogContext.jsx'
 import { isEmail } from '../../utils/validators.js'
 import './Home.css'
 
@@ -38,6 +38,7 @@ const pillars = [
 ]
 
 function Home() {
+  const { categories, products } = useCatalog()
   const novidades = products.filter((p) => p.tags.includes('novo')).slice(0, 8)
 
   const [email, setEmail] = useState('')
