@@ -1,0 +1,48 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Back-end: Spring Boot (8080)",
+            "type": "shell",
+            "command": ".\\mvnw.cmd spring-boot:run",
+            "options": {
+                "cwd": "${workspaceFolder}/MM_Modas_Back"
+            },
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "group": "mm-modas"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Front-end: React Vite (5173)",
+            "type": "shell",
+            "command": "npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/MM_Modas_Front"
+            },
+            "isBackground": true,
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "group": "mm-modas"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Rodar Projeto Completo (Back + Front)",
+            "dependsOn": [
+                "Back-end: Spring Boot (8080)",
+                "Front-end: React Vite (5173)"
+            ],
+            "dependsOrder": "parallel",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}
