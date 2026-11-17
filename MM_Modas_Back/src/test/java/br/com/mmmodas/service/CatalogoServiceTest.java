@@ -47,6 +47,7 @@ class CatalogoServiceTest {
     private CatalogoService catalogoService;
 
     @Test
+    @SuppressWarnings("null")
     @DisplayName("Deve criar nova categoria gerando slug normalizado sem acentos")
     void deveCriarCategoriaComSlugNormalizado() {
         when(categoriaRepository.existsBySlug("alfaiataria-blazers")).thenReturn(false);
@@ -74,6 +75,7 @@ class CatalogoServiceTest {
     }
 
     @Test
+    @SuppressWarnings("null")
     @DisplayName("Deve atualizar preco promocional e estoque de um produto da MM MODAS")
     void deveAtualizarDadosComerciaisDoProduto() {
         UUID prodId = UUID.randomUUID();

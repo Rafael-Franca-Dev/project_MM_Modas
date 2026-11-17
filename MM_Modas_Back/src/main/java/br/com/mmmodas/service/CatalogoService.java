@@ -116,7 +116,6 @@ public class CatalogoService {
     }
 
     @Transactional
-    @SuppressWarnings("null")
     public ProdutoResponse atualizarComercialPorSlug(String slug, AtualizarComercialProdutoRequest req) {
         Produto produto = produtoRepository.buscarAtivoPorSlugComDetalhes(slug)
                 .orElseThrow(() -> new RecursoNaoEncontradoException("Produto nao encontrado: " + slug));

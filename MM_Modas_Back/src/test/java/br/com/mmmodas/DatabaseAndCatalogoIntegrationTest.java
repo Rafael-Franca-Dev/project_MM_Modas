@@ -33,7 +33,7 @@ class DatabaseAndCatalogoIntegrationTest {
         assertEquals("tshirts", categorias.get(0).slug());
 
         // Confirma que nenhuma categoria de jogos está ativa
-        List<String> slugsAtivos = categorias.stream().map(CategoriaResponse::slug).toList();
+        List<String> slugsAtivos = categorias.stream().map(c -> c.slug()).toList();
         assertFalse(slugsAtivos.contains("rpg"));
         assertFalse(slugsAtivos.contains("estrategia"));
 

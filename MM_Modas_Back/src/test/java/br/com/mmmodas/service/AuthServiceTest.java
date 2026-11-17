@@ -54,6 +54,7 @@ class AuthServiceTest {
     }
 
     @Test
+    @SuppressWarnings("null")
     @DisplayName("Deve registrar funcionario com perfil ADMIN quando matricula valida de 8 caracteres for informada")
     void deveRegistrarFuncionarioComoAdmin() {
         when(clienteRepository.existsByEmailIgnoreCase("equipe@mmmodas.com")).thenReturn(false);
