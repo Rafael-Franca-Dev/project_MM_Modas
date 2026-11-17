@@ -51,7 +51,7 @@ export const categories = [
 export const products = [
   {
     id: 1,
-    variacaoId: "44444444-4444-4444-4444-444444444001",
+    variacaoId: "44444444-4444-8888-8888-000000000001",
     slug: "camiseta-sorriso-maroto",
     name: "T-Shirt Sorriso Maroto",
     category: "tshirts",
@@ -67,7 +67,7 @@ export const products = [
   },
   {
     id: 2,
-    variacaoId: "44444444-4444-4444-4444-444444444002",
+    variacaoId: "44444444-4444-8888-8888-000000000002",
     slug: "tshirt-oversized-street-mm",
     name: "T-Shirt Oversized Street MM",
     category: "tshirts",
@@ -82,7 +82,7 @@ export const products = [
   },
   {
     id: 3,
-    variacaoId: "44444444-4444-4444-4444-444444444003",
+    variacaoId: "44444444-4444-8888-8888-000000000003",
     slug: "tshirt-heavy-cotton-no-rules",
     name: "T-Shirt Heavy Cotton No Rules",
     category: "tshirts",
@@ -96,7 +96,7 @@ export const products = [
   },
   {
     id: 4,
-    variacaoId: "44444444-4444-4444-4444-444444444004",
+    variacaoId: "44444444-4444-8888-8888-000000000004",
     slug: "tshirt-estonada-vintage-club",
     name: "T-Shirt Estonada Vintage Club",
     category: "tshirts",
@@ -111,7 +111,7 @@ export const products = [
   },
   {
     id: 5,
-    variacaoId: "44444444-4444-4444-4444-444444444005",
+    variacaoId: "44444444-4444-8888-8888-000000000005",
     slug: "tshirt-boxy-noite-recife",
     name: "T-Shirt Boxy Noite Recife",
     category: "tshirts",
@@ -125,7 +125,7 @@ export const products = [
   },
   {
     id: 6,
-    variacaoId: "44444444-4444-4444-4444-444444444006",
+    variacaoId: "44444444-4444-8888-8888-000000000006",
     slug: "tshirt-graphic-caos-criativo",
     name: "T-Shirt Graphic Caos Criativo",
     category: "tshirts",
@@ -139,7 +139,7 @@ export const products = [
   },
   {
     id: 7,
-    variacaoId: "44444444-4444-4444-4444-444444444007",
+    variacaoId: "44444444-4444-8888-8888-000000000007",
     slug: "tshirt-gola-alta-ribana",
     name: "T-Shirt Gola Alta Ribana",
     category: "tshirts",
@@ -153,7 +153,7 @@ export const products = [
   },
   {
     id: 8,
-    variacaoId: "44444444-4444-4444-4444-444444444008",
+    variacaoId: "44444444-4444-8888-8888-000000000008",
     slug: "tshirt-oversized-arte-urbana",
     name: "T-Shirt Oversized Arte Urbana",
     category: "tshirts",
@@ -168,7 +168,7 @@ export const products = [
   },
   {
     id: 9,
-    variacaoId: "44444444-4444-4444-4444-444444444009",
+    variacaoId: "44444444-4444-8888-8888-000000000009",
     slug: "tshirt-acid-wash-menino-mau",
     name: "T-Shirt Acid Wash Menino Mau",
     category: "tshirts",
@@ -182,7 +182,7 @@ export const products = [
   },
   {
     id: 10,
-    variacaoId: "44444444-4444-4444-4444-444444444010",
+    variacaoId: "44444444-4444-8888-8888-000000000010",
     slug: "tshirt-minimal-pocket-mm",
     name: "T-Shirt Minimal Pocket MM",
     category: "tshirts",
@@ -196,7 +196,7 @@ export const products = [
   },
   {
     id: 11,
-    variacaoId: "44444444-4444-4444-4444-444444444011",
+    variacaoId: "44444444-4444-8888-8888-000000000011",
     slug: "tshirt-drop-shoulder-horizonte",
     name: "T-Shirt Drop Shoulder Horizonte",
     category: "tshirts",
@@ -210,7 +210,7 @@ export const products = [
   },
   {
     id: 12,
-    variacaoId: "44444444-4444-4444-4444-444444444012",
+    variacaoId: "44444444-4444-8888-8888-000000000012",
     slug: "tshirt-manga-longa-street",
     name: "T-Shirt Manga Longa Street",
     category: "tshirts",
@@ -225,7 +225,7 @@ export const products = [
   },
   {
     id: 13,
-    variacaoId: "44444444-4444-4444-4444-444444444013",
+    variacaoId: "44444444-4444-8888-8888-000000000013",
     slug: "tshirt-suede-touch-premium",
     name: "T-Shirt Suede Touch Premium",
     category: "tshirts",
@@ -239,7 +239,7 @@ export const products = [
   },
   {
     id: 14,
-    variacaoId: "44444444-4444-4444-4444-444444444014",
+    variacaoId: "44444444-4444-8888-8888-000000000014",
     slug: "tshirt-listrada-retro-90s",
     name: "T-Shirt Listrada Retro 90s",
     category: "tshirts",
@@ -253,7 +253,7 @@ export const products = [
   },
   {
     id: 15,
-    variacaoId: "44444444-4444-4444-4444-444444444015",
+    variacaoId: "44444444-4444-8888-8888-000000000015",
     slug: "tshirt-contrast-stitch-mm",
     name: "T-Shirt Contrast Stitch MM",
     category: "tshirts",
@@ -267,7 +267,7 @@ export const products = [
   },
   {
     id: 16,
-    variacaoId: "44444444-4444-4444-4444-444444444016",
+    variacaoId: "44444444-4444-8888-8888-000000000016",
     slug: "tshirt-raglan-urban-block",
     name: "T-Shirt Raglan Urban Block",
     category: "tshirts",
@@ -282,7 +282,7 @@ export const products = [
   },
   {
     id: 17,
-    variacaoId: "44444444-4444-4444-4444-444444444017",
+    variacaoId: "44444444-4444-8888-8888-000000000017",
     slug: "tshirt-slub-flame-brisa",
     name: "T-Shirt Slub Flamê Brisa",
     category: "tshirts",
@@ -296,7 +296,7 @@ export const products = [
   },
   {
     id: 18,
-    variacaoId: "44444444-4444-4444-4444-444444444018",
+    variacaoId: "44444444-4444-8888-8888-000000000018",
     slug: "tshirt-collector-edition-mm",
     name: "T-Shirt Collector Edition MM",
     category: "tshirts",
@@ -310,7 +310,7 @@ export const products = [
   },
   {
     id: 19,
-    variacaoId: "44444444-4444-4444-4444-444444444019",
+    variacaoId: "44444444-4444-8888-8888-000000000019",
     slug: "camiseta-sem-pedir-licenca",
     name: "Camiseta Sem Pedir Licença",
     category: "camisetas",
@@ -326,7 +326,7 @@ export const products = [
   },
   {
     id: 20,
-    variacaoId: "44444444-4444-4444-4444-444444444020",
+    variacaoId: "44444444-4444-8888-8888-000000000020",
     slug: "regata-cachos-ao-vento",
     name: "Regata Cachos ao Vento",
     category: "camisetas",
@@ -341,7 +341,7 @@ export const products = [
   },
   {
     id: 21,
-    variacaoId: "44444444-4444-4444-4444-444444444021",
+    variacaoId: "44444444-4444-8888-8888-000000000021",
     slug: "camiseta-basica-essencial-mm",
     name: "Camiseta Básica Essencial MM",
     category: "camisetas",
@@ -355,7 +355,7 @@ export const products = [
   },
   {
     id: 22,
-    variacaoId: "44444444-4444-4444-4444-444444444022",
+    variacaoId: "44444444-4444-8888-8888-000000000022",
     slug: "camiseta-henley-3-botoes",
     name: "Camiseta Henley 3 Botões",
     category: "camisetas",
@@ -370,7 +370,7 @@ export const products = [
   },
   {
     id: 23,
-    variacaoId: "44444444-4444-4444-4444-444444444023",
+    variacaoId: "44444444-4444-8888-8888-000000000023",
     slug: "regata-machao-praia-asfalto",
     name: "Regata Machão Praia & Asfalto",
     category: "camisetas",
@@ -384,7 +384,7 @@ export const products = [
   },
   {
     id: 24,
-    variacaoId: "44444444-4444-4444-4444-444444444024",
+    variacaoId: "44444444-4444-8888-8888-000000000024",
     slug: "camiseta-gola-v-discreta",
     name: "Camiseta Gola V Discreta",
     category: "camisetas",
@@ -398,7 +398,7 @@ export const products = [
   },
   {
     id: 25,
-    variacaoId: "44444444-4444-4444-4444-444444444025",
+    variacaoId: "44444444-4444-8888-8888-000000000025",
     slug: "camiseta-manga-longa-casual",
     name: "Camiseta Manga Longa Térmica Casual",
     category: "camisetas",
@@ -412,7 +412,7 @@ export const products = [
   },
   {
     id: 26,
-    variacaoId: "44444444-4444-4444-4444-444444444026",
+    variacaoId: "44444444-4444-8888-8888-000000000026",
     slug: "regata-canelada-old-school",
     name: "Regata Canelada Old School",
     category: "camisetas",
@@ -427,7 +427,7 @@ export const products = [
   },
   {
     id: 27,
-    variacaoId: "44444444-4444-4444-4444-444444444027",
+    variacaoId: "44444444-4444-8888-8888-000000000027",
     slug: "camiseta-estampa-sorriso-canto",
     name: "Camiseta Estampa Sorriso de Canto",
     category: "camisetas",
@@ -441,7 +441,7 @@ export const products = [
   },
   {
     id: 28,
-    variacaoId: "44444444-4444-4444-4444-444444444028",
+    variacaoId: "44444444-4444-8888-8888-000000000028",
     slug: "camiseta-pima-touch-luxo",
     name: "Camiseta Pima Touch Luxo",
     category: "camisetas",
@@ -455,7 +455,7 @@ export const products = [
   },
   {
     id: 29,
-    variacaoId: "44444444-4444-4444-4444-444444444029",
+    variacaoId: "44444444-4444-8888-8888-000000000029",
     slug: "camiseta-barra-curva-longline",
     name: "Camiseta Barra Curva Longline",
     category: "camisetas",
@@ -469,7 +469,7 @@ export const products = [
   },
   {
     id: 30,
-    variacaoId: "44444444-4444-4444-4444-444444444030",
+    variacaoId: "44444444-4444-8888-8888-000000000030",
     slug: "camiseta-henley-manga-longa",
     name: "Camiseta Henley Manga Longa",
     category: "camisetas",
@@ -484,7 +484,7 @@ export const products = [
   },
   {
     id: 31,
-    variacaoId: "44444444-4444-4444-4444-444444444031",
+    variacaoId: "44444444-4444-8888-8888-000000000031",
     slug: "regata-cavada-vibe-tropical",
     name: "Regata Cavada Vibe Tropical",
     category: "camisetas",
@@ -498,7 +498,7 @@ export const products = [
   },
   {
     id: 32,
-    variacaoId: "44444444-4444-4444-4444-444444444032",
+    variacaoId: "44444444-4444-8888-8888-000000000032",
     slug: "camiseta-bolso-contraste",
     name: "Camiseta Bolso Contraste",
     category: "camisetas",
@@ -512,7 +512,7 @@ export const products = [
   },
   {
     id: 33,
-    variacaoId: "44444444-4444-4444-4444-444444444033",
+    variacaoId: "44444444-4444-8888-8888-000000000033",
     slug: "camiseta-fio-egipcio-mm",
     name: "Camiseta Gola Careca Fio Egípcio",
     category: "camisetas",
@@ -527,7 +527,7 @@ export const products = [
   },
   {
     id: 34,
-    variacaoId: "44444444-4444-4444-4444-444444444034",
+    variacaoId: "44444444-4444-8888-8888-000000000034",
     slug: "camiseta-dupla-face-urbana",
     name: "Camiseta Dupla Face Urbana",
     category: "camisetas",
@@ -541,7 +541,7 @@ export const products = [
   },
   {
     id: 35,
-    variacaoId: "44444444-4444-4444-4444-444444444035",
+    variacaoId: "44444444-4444-8888-8888-000000000035",
     slug: "regata-machao-estonada-rock",
     name: "Regata Machão Estonada Rock",
     category: "camisetas",
@@ -555,7 +555,7 @@ export const products = [
   },
   {
     id: 36,
-    variacaoId: "44444444-4444-4444-4444-444444444036",
+    variacaoId: "44444444-4444-8888-8888-000000000036",
     slug: "kit-3-camisetas-basicas-mm",
     name: "Kit 3 Camisetas Básicas Menino Mau",
     category: "camisetas",
@@ -570,7 +570,7 @@ export const products = [
   },
   {
     id: 37,
-    variacaoId: "44444444-4444-4444-4444-444444444037",
+    variacaoId: "44444444-4444-8888-8888-000000000037",
     slug: "polo-menino-bom",
     name: "Polo Menino Bom (Só na Aparência)",
     category: "polos",
@@ -586,7 +586,7 @@ export const products = [
   },
   {
     id: 38,
-    variacaoId: "44444444-4444-4444-4444-444444444038",
+    variacaoId: "44444444-4444-8888-8888-000000000038",
     slug: "polo-piquet-classica-mm",
     name: "Polo Piquet Clássica MM",
     category: "polos",
@@ -600,7 +600,7 @@ export const products = [
   },
   {
     id: 39,
-    variacaoId: "44444444-4444-4444-4444-444444444039",
+    variacaoId: "44444444-4444-8888-8888-000000000039",
     slug: "polo-gola-padre-minimal",
     name: "Polo Gola Padre Minimal",
     category: "polos",
@@ -615,7 +615,7 @@ export const products = [
   },
   {
     id: 40,
-    variacaoId: "44444444-4444-4444-4444-444444444040",
+    variacaoId: "44444444-4444-8888-8888-000000000040",
     slug: "polo-trico-texturizada",
     name: "Polo Tricô Texturizada",
     category: "polos",
@@ -629,7 +629,7 @@ export const products = [
   },
   {
     id: 41,
-    variacaoId: "44444444-4444-4444-4444-444444444041",
+    variacaoId: "44444444-4444-8888-8888-000000000041",
     slug: "polo-friso-duplo-sport",
     name: "Polo Friso Duplo Sport",
     category: "polos",
@@ -643,7 +643,7 @@ export const products = [
   },
   {
     id: 42,
-    variacaoId: "44444444-4444-4444-4444-444444444042",
+    variacaoId: "44444444-4444-8888-8888-000000000042",
     slug: "polo-malha-lisa-slim",
     name: "Polo Malha Lisa Slim Fit",
     category: "polos",
@@ -657,7 +657,7 @@ export const products = [
   },
   {
     id: 43,
-    variacaoId: "44444444-4444-4444-4444-444444444043",
+    variacaoId: "44444444-4444-8888-8888-000000000043",
     slug: "polo-ziper-frontal-urban",
     name: "Polo Zíper Frontal Urban",
     category: "polos",
@@ -672,7 +672,7 @@ export const products = [
   },
   {
     id: 44,
-    variacaoId: "44444444-4444-4444-4444-444444444044",
+    variacaoId: "44444444-4444-8888-8888-000000000044",
     slug: "polo-manga-longa-inverno",
     name: "Polo Manga Longa Inverno",
     category: "polos",
@@ -686,7 +686,7 @@ export const products = [
   },
   {
     id: 45,
-    variacaoId: "44444444-4444-4444-4444-444444444045",
+    variacaoId: "44444444-4444-8888-8888-000000000045",
     slug: "polo-listrada-rugby-club",
     name: "Polo Listrada Rugby Club",
     category: "polos",
@@ -700,7 +700,7 @@ export const products = [
   },
   {
     id: 46,
-    variacaoId: "44444444-4444-4444-4444-444444444046",
+    variacaoId: "44444444-4444-8888-8888-000000000046",
     slug: "polo-linho-misto-brisa",
     name: "Polo Linho Misto Brisa",
     category: "polos",
@@ -714,7 +714,7 @@ export const products = [
   },
   {
     id: 47,
-    variacaoId: "44444444-4444-4444-4444-444444444047",
+    variacaoId: "44444444-4444-8888-8888-000000000047",
     slug: "polo-tech-dry-performance",
     name: "Polo Tech Dry Performance",
     category: "polos",
@@ -729,7 +729,7 @@ export const products = [
   },
   {
     id: 48,
-    variacaoId: "44444444-4444-4444-4444-444444444048",
+    variacaoId: "44444444-4444-8888-8888-000000000048",
     slug: "polo-bolso-peito-casual",
     name: "Polo Bolso Peito Casual",
     category: "polos",
@@ -743,7 +743,7 @@ export const products = [
   },
   {
     id: 49,
-    variacaoId: "44444444-4444-4444-4444-444444444049",
+    variacaoId: "44444444-4444-8888-8888-000000000049",
     slug: "polo-colarinho-italiano",
     name: "Polo Colarinho Italiano",
     category: "polos",
@@ -757,7 +757,7 @@ export const products = [
   },
   {
     id: 50,
-    variacaoId: "44444444-4444-4444-4444-444444444050",
+    variacaoId: "44444444-4444-8888-8888-000000000050",
     slug: "polo-colorblock-90s",
     name: "Polo Colorblock 90s",
     category: "polos",
@@ -771,7 +771,7 @@ export const products = [
   },
   {
     id: 51,
-    variacaoId: "44444444-4444-4444-4444-444444444051",
+    variacaoId: "44444444-4444-8888-8888-000000000051",
     slug: "polo-piquet-estonada-teracota",
     name: "Polo Piquet Estonada Terracota",
     category: "polos",
@@ -786,7 +786,7 @@ export const products = [
   },
   {
     id: 52,
-    variacaoId: "44444444-4444-4444-4444-444444444052",
+    variacaoId: "44444444-4444-8888-8888-000000000052",
     slug: "polo-suedine-toque-pessego",
     name: "Polo Suedine Toque Pêssego",
     category: "polos",
@@ -800,7 +800,7 @@ export const products = [
   },
   {
     id: 53,
-    variacaoId: "44444444-4444-4444-4444-444444444053",
+    variacaoId: "44444444-4444-8888-8888-000000000053",
     slug: "polo-botao-oculto-smart",
     name: "Polo Botão Oculto Smart",
     category: "polos",
@@ -814,7 +814,7 @@ export const products = [
   },
   {
     id: 54,
-    variacaoId: "44444444-4444-4444-4444-444444444054",
+    variacaoId: "44444444-4444-8888-8888-000000000054",
     slug: "kit-2-polos-essenciais-mm",
     name: "Kit 2 Polos Essenciais MM",
     category: "polos",
@@ -829,7 +829,7 @@ export const products = [
   },
   {
     id: 55,
-    variacaoId: "44444444-4444-4444-4444-444444444055",
+    variacaoId: "44444444-4444-8888-8888-000000000055",
     slug: "camisa-botao-vibe",
     name: "Camisa de Botão Vibe Linho",
     category: "camisas",
@@ -845,7 +845,7 @@ export const products = [
   },
   {
     id: 56,
-    variacaoId: "44444444-4444-4444-4444-444444444056",
+    variacaoId: "44444444-4444-8888-8888-000000000056",
     slug: "camisa-flanela-role-frio",
     name: "Camisa Flanela Rolê Frio",
     category: "camisas",
@@ -860,7 +860,7 @@ export const products = [
   },
   {
     id: 57,
-    variacaoId: "44444444-4444-4444-4444-444444444057",
+    variacaoId: "44444444-4444-8888-8888-000000000057",
     slug: "camisa-social-maroto",
     name: "Camisa Social Maroto Slim",
     category: "camisas",
@@ -875,7 +875,7 @@ export const products = [
   },
   {
     id: 58,
-    variacaoId: "44444444-4444-4444-4444-444444444058",
+    variacaoId: "44444444-4444-8888-8888-000000000058",
     slug: "camisa-linho-manga-curta",
     name: "Camisa Linho Puro Manga Curta",
     category: "camisas",
@@ -889,7 +889,7 @@ export const products = [
   },
   {
     id: 59,
-    variacaoId: "44444444-4444-4444-4444-444444444059",
+    variacaoId: "44444444-4444-8888-8888-000000000059",
     slug: "camisa-gola-padre-algodao",
     name: "Camisa Gola Padre Algodão",
     category: "camisas",
@@ -903,7 +903,7 @@ export const products = [
   },
   {
     id: 60,
-    variacaoId: "44444444-4444-4444-4444-444444444060",
+    variacaoId: "44444444-4444-8888-8888-000000000060",
     slug: "sobrecamisa-overshirt-sarja",
     name: "Sobrecamisa Overshirt Sarja",
     category: "camisas",
@@ -918,7 +918,7 @@ export const products = [
   },
   {
     id: 61,
-    variacaoId: "44444444-4444-4444-4444-444444444061",
+    variacaoId: "44444444-4444-8888-8888-000000000061",
     slug: "camisa-jeans-lavagem-clara",
     name: "Camisa Jeans Lavagem Clara",
     category: "camisas",
@@ -932,7 +932,7 @@ export const products = [
   },
   {
     id: 62,
-    variacaoId: "44444444-4444-4444-4444-444444444062",
+    variacaoId: "44444444-4444-8888-8888-000000000062",
     slug: "camisa-resort-gola-cubana",
     name: "Camisa Resort Gola Cubana",
     category: "camisas",
@@ -946,7 +946,7 @@ export const products = [
   },
   {
     id: 63,
-    variacaoId: "44444444-4444-4444-4444-444444444063",
+    variacaoId: "44444444-4444-8888-8888-000000000063",
     slug: "camisa-oxford-button-down",
     name: "Camisa Oxford Clássica Button-Down",
     category: "camisas",
@@ -960,7 +960,7 @@ export const products = [
   },
   {
     id: 64,
-    variacaoId: "44444444-4444-4444-4444-444444444064",
+    variacaoId: "44444444-4444-8888-8888-000000000064",
     slug: "camisa-xadrez-lenhador-nocturne",
     name: "Camisa Xadrez Lenhador Nocturne",
     category: "camisas",
@@ -975,7 +975,7 @@ export const products = [
   },
   {
     id: 65,
-    variacaoId: "44444444-4444-4444-4444-444444444065",
+    variacaoId: "44444444-4444-8888-8888-000000000065",
     slug: "camisa-listrada-vertical-relax",
     name: "Camisa Listrada Vertical Relax",
     category: "camisas",
@@ -989,7 +989,7 @@ export const products = [
   },
   {
     id: 66,
-    variacaoId: "44444444-4444-4444-4444-444444444066",
+    variacaoId: "44444444-4444-8888-8888-000000000066",
     slug: "camisa-cambraia-preta-noite",
     name: "Camisa Cambraia Preta Noite",
     category: "camisas",
@@ -1003,7 +1003,7 @@ export const products = [
   },
   {
     id: 67,
-    variacaoId: "44444444-4444-4444-4444-444444444067",
+    variacaoId: "44444444-4444-8888-8888-000000000067",
     slug: "camisa-veludo-cotele-mm",
     name: "Camisa Canelada Veludo Cotelê",
     category: "camisas",
@@ -1017,7 +1017,7 @@ export const products = [
   },
   {
     id: 68,
-    variacaoId: "44444444-4444-4444-4444-444444444068",
+    variacaoId: "44444444-4444-8888-8888-000000000068",
     slug: "camisa-manga-curta-waffle",
     name: "Camisa Manga Curta Textura Waffle",
     category: "camisas",
@@ -1032,7 +1032,7 @@ export const products = [
   },
   {
     id: 69,
-    variacaoId: "44444444-4444-4444-4444-444444444069",
+    variacaoId: "44444444-4444-8888-8888-000000000069",
     slug: "camisa-social-non-iron",
     name: "Camisa Social Non-Iron Executiva",
     category: "camisas",
@@ -1046,7 +1046,7 @@ export const products = [
   },
   {
     id: 70,
-    variacaoId: "44444444-4444-4444-4444-444444444070",
+    variacaoId: "44444444-4444-8888-8888-000000000070",
     slug: "camisa-bolso-duplo-safari",
     name: "Camisa Bolso Duplo Safari",
     category: "camisas",
@@ -1060,7 +1060,7 @@ export const products = [
   },
   {
     id: 71,
-    variacaoId: "44444444-4444-4444-4444-444444444071",
+    variacaoId: "44444444-4444-8888-8888-000000000071",
     slug: "camisa-chambray-indigo",
     name: "Camisa Chambray Indigo",
     category: "camisas",
@@ -1074,7 +1074,7 @@ export const products = [
   },
   {
     id: 72,
-    variacaoId: "44444444-4444-4444-4444-444444444072",
+    variacaoId: "44444444-4444-8888-8888-000000000072",
     slug: "camisa-estampada-folhagem-noturna",
     name: "Camisa Estampada Folhagem Noturna",
     category: "camisas",
@@ -1089,7 +1089,7 @@ export const products = [
   },
   {
     id: 73,
-    variacaoId: "44444444-4444-4444-4444-444444444073",
+    variacaoId: "44444444-4444-8888-8888-000000000073",
     slug: "moletom-sem-filtro",
     name: "Moletom Sem Filtro Canguru",
     category: "moletons",
@@ -1105,7 +1105,7 @@ export const products = [
   },
   {
     id: 74,
-    variacaoId: "44444444-4444-4444-4444-444444444074",
+    variacaoId: "44444444-4444-8888-8888-000000000074",
     slug: "moletom-careta",
     name: "Moletom Careta Bordado",
     category: "moletons",
@@ -1120,7 +1120,7 @@ export const products = [
   },
   {
     id: 75,
-    variacaoId: "44444444-4444-4444-4444-444444444075",
+    variacaoId: "44444444-4444-8888-8888-000000000075",
     slug: "hoodie-oversized-heavyweight",
     name: "Hoodie Oversized Heavyweight 400g",
     category: "moletons",
@@ -1135,7 +1135,7 @@ export const products = [
   },
   {
     id: 76,
-    variacaoId: "44444444-4444-4444-4444-444444444076",
+    variacaoId: "44444444-4444-8888-8888-000000000076",
     slug: "moletom-aberto-ziper-urban",
     name: "Moletom Aberto com Zíper Urban",
     category: "moletons",
@@ -1149,7 +1149,7 @@ export const products = [
   },
   {
     id: 77,
-    variacaoId: "44444444-4444-4444-4444-444444444077",
+    variacaoId: "44444444-4444-8888-8888-000000000077",
     slug: "moletom-gola-careca-crewneck",
     name: "Moletom Gola Careca Crewneck MM",
     category: "moletons",
@@ -1163,7 +1163,7 @@ export const products = [
   },
   {
     id: 78,
-    variacaoId: "44444444-4444-4444-4444-444444444078",
+    variacaoId: "44444444-4444-8888-8888-000000000078",
     slug: "hoodie-estonado-acid-grey",
     name: "Hoodie Estonado Acid Grey",
     category: "moletons",
@@ -1178,7 +1178,7 @@ export const products = [
   },
   {
     id: 79,
-    variacaoId: "44444444-4444-4444-4444-444444444079",
+    variacaoId: "44444444-4444-8888-8888-000000000079",
     slug: "moletom-meio-ziper-quarter",
     name: "Moletom Meio-Zíper Quarter Zip",
     category: "moletons",
@@ -1192,7 +1192,7 @@ export const products = [
   },
   {
     id: 80,
-    variacaoId: "44444444-4444-4444-4444-444444444080",
+    variacaoId: "44444444-4444-8888-8888-000000000080",
     slug: "hoodie-graphic-costas-mm",
     name: "Hoodie Graphic Costas Menino Mau",
     category: "moletons",
@@ -1206,7 +1206,7 @@ export const products = [
   },
   {
     id: 81,
-    variacaoId: "44444444-4444-4444-4444-444444444081",
+    variacaoId: "44444444-4444-8888-8888-000000000081",
     slug: "moletom-raglan-colorblock",
     name: "Moletom Raglan Colorblock",
     category: "moletons",
@@ -1220,7 +1220,7 @@ export const products = [
   },
   {
     id: 82,
-    variacaoId: "44444444-4444-4444-4444-444444444082",
+    variacaoId: "44444444-4444-8888-8888-000000000082",
     slug: "hoodie-sem-felpa-meia-estacao",
     name: "Hoodie Sem Felpa Meia-Estação",
     category: "moletons",
@@ -1235,7 +1235,7 @@ export const products = [
   },
   {
     id: 83,
-    variacaoId: "44444444-4444-4444-4444-444444444083",
+    variacaoId: "44444444-4444-8888-8888-000000000083",
     slug: "moletom-ziper-tech-bolso",
     name: "Moletom Zíper Tech Bolso Selado",
     category: "moletons",
@@ -1249,7 +1249,7 @@ export const products = [
   },
   {
     id: 84,
-    variacaoId: "44444444-4444-4444-4444-444444444084",
+    variacaoId: "44444444-4444-8888-8888-000000000084",
     slug: "crewneck-bordado-faculdade-mm",
     name: "Crewneck Bordado Faculdade MM",
     category: "moletons",
@@ -1263,7 +1263,7 @@ export const products = [
   },
   {
     id: 85,
-    variacaoId: "44444444-4444-4444-4444-444444444085",
+    variacaoId: "44444444-4444-8888-8888-000000000085",
     slug: "hoodie-bolso-duplo-utilitario",
     name: "Hoodie Bolso Duplo Utilitário",
     category: "moletons",
@@ -1277,7 +1277,7 @@ export const products = [
   },
   {
     id: 86,
-    variacaoId: "44444444-4444-4444-4444-444444444086",
+    variacaoId: "44444444-4444-8888-8888-000000000086",
     slug: "moletom-manga-curta-street",
     name: "Moletom Manga Curta Street",
     category: "moletons",
@@ -1292,7 +1292,7 @@ export const products = [
   },
   {
     id: 87,
-    variacaoId: "44444444-4444-4444-4444-444444444087",
+    variacaoId: "44444444-4444-8888-8888-000000000087",
     slug: "crewneck-pespontado-contrast",
     name: "Crewneck Pespontado Contrast",
     category: "moletons",
@@ -1306,7 +1306,7 @@ export const products = [
   },
   {
     id: 88,
-    variacaoId: "44444444-4444-4444-4444-444444444088",
+    variacaoId: "44444444-4444-8888-8888-000000000088",
     slug: "hoodie-veludo-plush-soft",
     name: "Hoodie Veludo Plush Ultra Soft",
     category: "moletons",
@@ -1320,7 +1320,7 @@ export const products = [
   },
   {
     id: 89,
-    variacaoId: "44444444-4444-4444-4444-444444444089",
+    variacaoId: "44444444-4444-8888-8888-000000000089",
     slug: "moletom-aberto-college-patch",
     name: "Moletom Aberto College Patch",
     category: "moletons",
@@ -1334,7 +1334,7 @@ export const products = [
   },
   {
     id: 90,
-    variacaoId: "44444444-4444-4444-4444-444444444090",
+    variacaoId: "44444444-4444-8888-8888-000000000090",
     slug: "hoodie-tie-dye-nuvem",
     name: "Hoodie Tie-Dye Nuvem",
     category: "moletons",
@@ -1349,7 +1349,7 @@ export const products = [
   },
   {
     id: 91,
-    variacaoId: "44444444-4444-4444-4444-444444444091",
+    variacaoId: "44444444-4444-8888-8888-000000000091",
     slug: "sueter-trico-aconchego",
     name: "Suéter Tricô Aconchego",
     category: "trico",
@@ -1364,7 +1364,7 @@ export const products = [
   },
   {
     id: 92,
-    variacaoId: "44444444-4444-4444-4444-444444444092",
+    variacaoId: "44444444-4444-8888-8888-000000000092",
     slug: "sueter-tranca-irlandesa",
     name: "Suéter Trança Irlandesa Fisherman",
     category: "trico",
@@ -1378,7 +1378,7 @@ export const products = [
   },
   {
     id: 93,
-    variacaoId: "44444444-4444-4444-4444-444444444093",
+    variacaoId: "44444444-4444-8888-8888-000000000093",
     slug: "cardiga-botoes-amadeirados",
     name: "Cardigã Botões Amadeirados",
     category: "trico",
@@ -1393,7 +1393,7 @@ export const products = [
   },
   {
     id: 94,
-    variacaoId: "44444444-4444-4444-4444-444444444094",
+    variacaoId: "44444444-4444-8888-8888-000000000094",
     slug: "trico-gola-alta-noir",
     name: "Tricô Gola Alta Turtleneck Noir",
     category: "trico",
@@ -1407,7 +1407,7 @@ export const products = [
   },
   {
     id: 95,
-    variacaoId: "44444444-4444-4444-4444-444444444095",
+    variacaoId: "44444444-4444-8888-8888-000000000095",
     slug: "sueter-ponto-arroz-texturizado",
     name: "Suéter Ponto Arroz Texturizado",
     category: "trico",
@@ -1421,7 +1421,7 @@ export const products = [
   },
   {
     id: 96,
-    variacaoId: "44444444-4444-4444-4444-444444444096",
+    variacaoId: "44444444-4444-8888-8888-000000000096",
     slug: "sueter-gola-v-executivo",
     name: "Suéter Gola V Executivo",
     category: "trico",
@@ -1435,7 +1435,7 @@ export const products = [
   },
   {
     id: 97,
-    variacaoId: "44444444-4444-4444-4444-444444444097",
+    variacaoId: "44444444-4444-8888-8888-000000000097",
     slug: "cardiga-gola-xale-inverno",
     name: "Cardigã Gola Xale Inverno",
     category: "trico",
@@ -1450,7 +1450,7 @@ export const products = [
   },
   {
     id: 98,
-    variacaoId: "44444444-4444-4444-4444-444444444098",
+    variacaoId: "44444444-4444-8888-8888-000000000098",
     slug: "trico-listrado-marinheiro",
     name: "Tricô Listrado Marinheiro",
     category: "trico",
@@ -1464,7 +1464,7 @@ export const products = [
   },
   {
     id: 99,
-    variacaoId: "44444444-4444-4444-4444-444444444099",
+    variacaoId: "44444444-4444-8888-8888-000000000099",
     slug: "sueter-meio-ziper-trico",
     name: "Suéter Meio-Zíper Tricô Fino",
     category: "trico",
@@ -1478,7 +1478,7 @@ export const products = [
   },
   {
     id: 100,
-    variacaoId: "44444444-4444-4444-4444-444444444100",
+    variacaoId: "44444444-4444-8888-8888-000000000100",
     slug: "colete-trico-street-vneck",
     name: "Colete de Tricô Street V-Neck",
     category: "trico",
@@ -1493,7 +1493,7 @@ export const products = [
   },
   {
     id: 101,
-    variacaoId: "44444444-4444-4444-4444-444444444101",
+    variacaoId: "44444444-4444-8888-8888-000000000101",
     slug: "sueter-jacquard-geometrico-mm",
     name: "Suéter Jacquard Geométrico MM",
     category: "trico",
@@ -1507,7 +1507,7 @@ export const products = [
   },
   {
     id: 102,
-    variacaoId: "44444444-4444-4444-4444-444444444102",
+    variacaoId: "44444444-4444-8888-8888-000000000102",
     slug: "trico-canelado-slim-muscle",
     name: "Tricô Canelado Slim Muscle",
     category: "trico",
@@ -1521,7 +1521,7 @@ export const products = [
   },
   {
     id: 103,
-    variacaoId: "44444444-4444-4444-4444-444444444103",
+    variacaoId: "44444444-4444-8888-8888-000000000103",
     slug: "cardiga-oversized-street",
     name: "Cardigã Oversized Street",
     category: "trico",
@@ -1535,7 +1535,7 @@ export const products = [
   },
   {
     id: 104,
-    variacaoId: "44444444-4444-4444-4444-444444444104",
+    variacaoId: "44444444-4444-8888-8888-000000000104",
     slug: "trico-gola-media-mock-neck",
     name: "Tricô Gola Média Mock Neck",
     category: "trico",
@@ -1550,7 +1550,7 @@ export const products = [
   },
   {
     id: 105,
-    variacaoId: "44444444-4444-4444-4444-444444444105",
+    variacaoId: "44444444-4444-8888-8888-000000000105",
     slug: "sueter-fio-flame-mesclado",
     name: "Suéter Fio Flamê Mesclado",
     category: "trico",
@@ -1564,7 +1564,7 @@ export const products = [
   },
   {
     id: 106,
-    variacaoId: "44444444-4444-4444-4444-444444444106",
+    variacaoId: "44444444-4444-8888-8888-000000000106",
     slug: "sueter-bolso-canguru-trico",
     name: "Suéter Bolso Canguru Tricô",
     category: "trico",
@@ -1578,7 +1578,7 @@ export const products = [
   },
   {
     id: 107,
-    variacaoId: "44444444-4444-4444-4444-444444444107",
+    variacaoId: "44444444-4444-8888-8888-000000000107",
     slug: "trico-raglan-bicolor",
     name: "Tricô Raglan Bicolor",
     category: "trico",
@@ -1592,7 +1592,7 @@ export const products = [
   },
   {
     id: 108,
-    variacaoId: "44444444-4444-4444-4444-444444444108",
+    variacaoId: "44444444-4444-8888-8888-000000000108",
     slug: "sueter-algodao-organico-brisa",
     name: "Suéter Algodão Orgânico Brisa",
     category: "trico",
@@ -1607,7 +1607,7 @@ export const products = [
   },
   {
     id: 109,
-    variacaoId: "44444444-4444-4444-4444-444444444109",
+    variacaoId: "44444444-4444-8888-8888-000000000109",
     slug: "jaqueta-corta-vento-atitude",
     name: "Jaqueta Corta-Vento Atitude",
     category: "jaquetas",
@@ -1623,7 +1623,7 @@ export const products = [
   },
   {
     id: 110,
-    variacaoId: "44444444-4444-4444-4444-444444444110",
+    variacaoId: "44444444-4444-8888-8888-000000000110",
     slug: "jaqueta-jeans-cacheada",
     name: "Jaqueta de Couro Cacheada",
     category: "jaquetas",
@@ -1639,7 +1639,7 @@ export const products = [
   },
   {
     id: 111,
-    variacaoId: "44444444-4444-4444-4444-444444444111",
+    variacaoId: "44444444-4444-8888-8888-000000000111",
     slug: "jaqueta-puffer-acolchoada-urbano",
     name: "Jaqueta Puffer Acolchoada Urbano",
     category: "jaquetas",
@@ -1654,7 +1654,7 @@ export const products = [
   },
   {
     id: 112,
-    variacaoId: "44444444-4444-4444-4444-444444444112",
+    variacaoId: "44444444-4444-8888-8888-000000000112",
     slug: "jaqueta-jeans-trucker-vintage",
     name: "Jaqueta Jeans Trucker Vintage",
     category: "jaquetas",
@@ -1668,7 +1668,7 @@ export const products = [
   },
   {
     id: 113,
-    variacaoId: "44444444-4444-4444-4444-444444444113",
+    variacaoId: "44444444-4444-8888-8888-000000000113",
     slug: "jaqueta-bomber-aviador-mm",
     name: "Jaqueta Bomber Aviador MM",
     category: "jaquetas",
@@ -1682,7 +1682,7 @@ export const products = [
   },
   {
     id: 114,
-    variacaoId: "44444444-4444-4444-4444-444444444114",
+    variacaoId: "44444444-4444-8888-8888-000000000114",
     slug: "colete-puffer-dupla-face",
     name: "Colete Puffer Dupla Face",
     category: "jaquetas",
@@ -1697,7 +1697,7 @@ export const products = [
   },
   {
     id: 115,
-    variacaoId: "44444444-4444-4444-4444-444444444115",
+    variacaoId: "44444444-4444-8888-8888-000000000115",
     slug: "jaqueta-college-varsity-mm",
     name: "Jaqueta College Varsity Menino Mau",
     category: "jaquetas",
@@ -1711,7 +1711,7 @@ export const products = [
   },
   {
     id: 116,
-    variacaoId: "44444444-4444-4444-4444-444444444116",
+    variacaoId: "44444444-4444-8888-8888-000000000116",
     slug: "jaqueta-jeans-gola-sherpa",
     name: "Jaqueta Jeans com Gola Sherpa",
     category: "jaquetas",
@@ -1726,7 +1726,7 @@ export const products = [
   },
   {
     id: 117,
-    variacaoId: "44444444-4444-4444-4444-444444444117",
+    variacaoId: "44444444-4444-8888-8888-000000000117",
     slug: "corta-vento-anorak-canguru",
     name: "Corta-Vento Anorak Canguru",
     category: "jaquetas",
@@ -1740,7 +1740,7 @@ export const products = [
   },
   {
     id: 118,
-    variacaoId: "44444444-4444-4444-4444-444444444118",
+    variacaoId: "44444444-4444-8888-8888-000000000118",
     slug: "jaqueta-sarja-worker-utilitaria",
     name: "Jaqueta Sarja Worker Utilitária",
     category: "jaquetas",
@@ -1754,7 +1754,7 @@ export const products = [
   },
   {
     id: 119,
-    variacaoId: "44444444-4444-4444-4444-444444444119",
+    variacaoId: "44444444-4444-8888-8888-000000000119",
     slug: "jaqueta-suede-camurca-camel",
     name: "Jaqueta Suede Camurça Camel",
     category: "jaquetas",
@@ -1768,7 +1768,7 @@ export const products = [
   },
   {
     id: 120,
-    variacaoId: "44444444-4444-4444-4444-444444444120",
+    variacaoId: "44444444-4444-8888-8888-000000000120",
     slug: "parka-impermeavel-tempestade",
     name: "Parka Impermeável Tempestade",
     category: "jaquetas",
@@ -1783,7 +1783,7 @@ export const products = [
   },
   {
     id: 121,
-    variacaoId: "44444444-4444-4444-4444-444444444121",
+    variacaoId: "44444444-4444-8888-8888-000000000121",
     slug: "jaqueta-harrington-classica",
     name: "Jaqueta Harrington Clássica",
     category: "jaquetas",
@@ -1797,7 +1797,7 @@ export const products = [
   },
   {
     id: 122,
-    variacaoId: "44444444-4444-4444-4444-444444444122",
+    variacaoId: "44444444-4444-8888-8888-000000000122",
     slug: "colete-utilitario-street-cargo",
     name: "Colete Utilitário Street Cargo",
     category: "jaquetas",
@@ -1811,7 +1811,7 @@ export const products = [
   },
   {
     id: 123,
-    variacaoId: "44444444-4444-4444-4444-444444444123",
+    variacaoId: "44444444-4444-8888-8888-000000000123",
     slug: "jaqueta-fleece-polar-termica",
     name: "Jaqueta Fleece Polar Térmica",
     category: "jaquetas",
@@ -1826,7 +1826,7 @@ export const products = [
   },
   {
     id: 124,
-    variacaoId: "44444444-4444-4444-4444-444444444124",
+    variacaoId: "44444444-4444-8888-8888-000000000124",
     slug: "jaqueta-biker-ziper-diagonal",
     name: "Jaqueta Biker Zíper Diagonal",
     category: "jaquetas",
@@ -1840,7 +1840,7 @@ export const products = [
   },
   {
     id: 125,
-    variacaoId: "44444444-4444-4444-4444-444444444125",
+    variacaoId: "44444444-4444-8888-8888-000000000125",
     slug: "jaqueta-tracksuit-retro-80s",
     name: "Jaqueta Tracksuit Retro 80s",
     category: "jaquetas",
@@ -1854,7 +1854,7 @@ export const products = [
   },
   {
     id: 126,
-    variacaoId: "44444444-4444-4444-4444-444444444126",
+    variacaoId: "44444444-4444-8888-8888-000000000126",
     slug: "blazer-desconstruido-casual-mm",
     name: "Blazer Desconstruído Casual MM",
     category: "jaquetas",
@@ -1869,7 +1869,7 @@ export const products = [
   },
   {
     id: 127,
-    variacaoId: "44444444-4444-4444-4444-444444444127",
+    variacaoId: "44444444-4444-8888-8888-000000000127",
     slug: "calca-cargo-role",
     name: "Calça Cargo Rolê 6 Bolsos",
     category: "calcas",
@@ -1884,7 +1884,7 @@ export const products = [
   },
   {
     id: 128,
-    variacaoId: "44444444-4444-4444-4444-444444444128",
+    variacaoId: "44444444-4444-8888-8888-000000000128",
     slug: "calca-jogger-domingo",
     name: "Calça Jogger Domingo Moletom",
     category: "calcas",
@@ -1898,7 +1898,7 @@ export const products = [
   },
   {
     id: 129,
-    variacaoId: "44444444-4444-4444-4444-444444444129",
+    variacaoId: "44444444-4444-8888-8888-000000000129",
     slug: "calca-jeans-slim-stretch",
     name: "Calça Jeans Slim Stretch Indigo",
     category: "calcas",
@@ -1913,7 +1913,7 @@ export const products = [
   },
   {
     id: 130,
-    variacaoId: "44444444-4444-4444-4444-444444444130",
+    variacaoId: "44444444-4444-8888-8888-000000000130",
     slug: "calca-chino-alfaiataria-casual",
     name: "Calça Chino Alfaiataria Casual",
     category: "calcas",
@@ -1927,7 +1927,7 @@ export const products = [
   },
   {
     id: 131,
-    variacaoId: "44444444-4444-4444-4444-444444444131",
+    variacaoId: "44444444-4444-8888-8888-000000000131",
     slug: "calca-jeans-carpenter-street",
     name: "Calça Jeans Carpenter Street",
     category: "calcas",
@@ -1941,7 +1941,7 @@ export const products = [
   },
   {
     id: 132,
-    variacaoId: "44444444-4444-4444-4444-444444444132",
+    variacaoId: "44444444-4444-8888-8888-000000000132",
     slug: "calca-jogger-sarja-punho",
     name: "Calça Jogger Sarja Punho",
     category: "calcas",
@@ -1956,7 +1956,7 @@ export const products = [
   },
   {
     id: 133,
-    variacaoId: "44444444-4444-4444-4444-444444444133",
+    variacaoId: "44444444-4444-8888-8888-000000000133",
     slug: "calca-linho-misto-praia",
     name: "Calça Linho Misto Praia & Bar",
     category: "calcas",
@@ -1970,7 +1970,7 @@ export const products = [
   },
   {
     id: 134,
-    variacaoId: "44444444-4444-4444-4444-444444444134",
+    variacaoId: "44444444-4444-8888-8888-000000000134",
     slug: "calca-cargo-parachute-nylon",
     name: "Calça Cargo Parachute Nylon",
     category: "calcas",
@@ -1984,7 +1984,7 @@ export const products = [
   },
   {
     id: 135,
-    variacaoId: "44444444-4444-4444-4444-444444444135",
+    variacaoId: "44444444-4444-8888-8888-000000000135",
     slug: "calca-jeans-preta-nofade",
     name: "Calça Jeans Preta No-Fade",
     category: "calcas",
@@ -1999,7 +1999,7 @@ export const products = [
   },
   {
     id: 136,
-    variacaoId: "44444444-4444-4444-4444-444444444136",
+    variacaoId: "44444444-4444-8888-8888-000000000136",
     slug: "calca-alfaiataria-cos-elastico",
     name: "Calça Alfaiataria Cós Elástico",
     category: "calcas",
@@ -2013,7 +2013,7 @@ export const products = [
   },
   {
     id: 137,
-    variacaoId: "44444444-4444-4444-4444-444444444137",
+    variacaoId: "44444444-4444-8888-8888-000000000137",
     slug: "calca-jeans-wide-leg-90s",
     name: "Calça Jeans Wide Leg 90s",
     category: "calcas",
@@ -2027,7 +2027,7 @@ export const products = [
   },
   {
     id: 138,
-    variacaoId: "44444444-4444-4444-4444-444444444138",
+    variacaoId: "44444444-4444-8888-8888-000000000138",
     slug: "calca-moletom-reta-open-hem",
     name: "Calça Moletom Reta Open Hem",
     category: "calcas",
@@ -2042,7 +2042,7 @@ export const products = [
   },
   {
     id: 139,
-    variacaoId: "44444444-4444-4444-4444-444444444139",
+    variacaoId: "44444444-4444-8888-8888-000000000139",
     slug: "calca-veludo-cotele-vintage",
     name: "Calça Veludo Cotelê Vintage",
     category: "calcas",
@@ -2056,7 +2056,7 @@ export const products = [
   },
   {
     id: 140,
-    variacaoId: "44444444-4444-4444-4444-444444444140",
+    variacaoId: "44444444-4444-8888-8888-000000000140",
     slug: "calca-cargo-ripstop-tatica",
     name: "Calça Cargo Ripstop Tática",
     category: "calcas",
@@ -2070,7 +2070,7 @@ export const products = [
   },
   {
     id: 141,
-    variacaoId: "44444444-4444-4444-4444-444444444141",
+    variacaoId: "44444444-4444-8888-8888-000000000141",
     slug: "calca-jeans-destroyed-moderado",
     name: "Calça Jeans Destroyed Moderado",
     category: "calcas",
@@ -2084,7 +2084,7 @@ export const products = [
   },
   {
     id: 142,
-    variacaoId: "44444444-4444-4444-4444-444444444142",
+    variacaoId: "44444444-4444-8888-8888-000000000142",
     slug: "calca-jogger-tech-impermeavel",
     name: "Calça Jogger Tech Impermeável",
     category: "calcas",
@@ -2099,7 +2099,7 @@ export const products = [
   },
   {
     id: 143,
-    variacaoId: "44444444-4444-4444-4444-444444444143",
+    variacaoId: "44444444-4444-8888-8888-000000000143",
     slug: "calca-sarja-five-pockets",
     name: "Calça Sarja Five Pockets",
     category: "calcas",
@@ -2113,7 +2113,7 @@ export const products = [
   },
   {
     id: 144,
-    variacaoId: "44444444-4444-4444-4444-444444444144",
+    variacaoId: "44444444-4444-8888-8888-000000000144",
     slug: "calca-cropped-smart-casual",
     name: "Calça Cropped Smart Casual",
     category: "calcas",
@@ -2127,7 +2127,7 @@ export const products = [
   },
   {
     id: 145,
-    variacaoId: "44444444-4444-4444-4444-444444444145",
+    variacaoId: "44444444-4444-8888-8888-000000000145",
     slug: "bermuda-sarja-solta",
     name: "Bermuda de Sarja Solta",
     category: "bermudas",
@@ -2142,7 +2142,7 @@ export const products = [
   },
   {
     id: 146,
-    variacaoId: "44444444-4444-4444-4444-444444444146",
+    variacaoId: "44444444-4444-8888-8888-000000000146",
     slug: "shorts-moletom-preguica",
     name: "Shorts Moletom Preguiça",
     category: "bermudas",
@@ -2156,7 +2156,7 @@ export const products = [
   },
   {
     id: 147,
-    variacaoId: "44444444-4444-4444-4444-444444444147",
+    variacaoId: "44444444-4444-8888-8888-000000000147",
     slug: "bermuda-cargo-street-6-bolsos",
     name: "Bermuda Cargo Street 6 Bolsos",
     category: "bermudas",
@@ -2171,7 +2171,7 @@ export const products = [
   },
   {
     id: 148,
-    variacaoId: "44444444-4444-4444-4444-444444444148",
+    variacaoId: "44444444-4444-8888-8888-000000000148",
     slug: "shorts-praia-secagem-rapida",
     name: "Shorts Praia Secagem Rápida MM",
     category: "bermudas",
@@ -2185,7 +2185,7 @@ export const products = [
   },
   {
     id: 149,
-    variacaoId: "44444444-4444-4444-4444-444444444149",
+    variacaoId: "44444444-4444-8888-8888-000000000149",
     slug: "bermuda-linho-resort",
     name: "Bermuda Linho Resort",
     category: "bermudas",
@@ -2199,7 +2199,7 @@ export const products = [
   },
   {
     id: 150,
-    variacaoId: "44444444-4444-4444-4444-444444444150",
+    variacaoId: "44444444-4444-8888-8888-000000000150",
     slug: "bermuda-jeans-desfiada-skate",
     name: "Bermuda Jeans Desfiada Skate",
     category: "bermudas",
@@ -2214,7 +2214,7 @@ export const products = [
   },
   {
     id: 151,
-    variacaoId: "44444444-4444-4444-4444-444444444151",
+    variacaoId: "44444444-4444-8888-8888-000000000151",
     slug: "bermuda-chino-alfaiataria",
     name: "Bermuda Chino Alfaiataria",
     category: "bermudas",
@@ -2228,7 +2228,7 @@ export const products = [
   },
   {
     id: 152,
-    variacaoId: "44444444-4444-4444-4444-444444444152",
+    variacaoId: "44444444-4444-8888-8888-000000000152",
     slug: "boardshort-ondas-nordeste",
     name: "Boardshort Ondas do Nordeste",
     category: "bermudas",
@@ -2242,7 +2242,7 @@ export const products = [
   },
   {
     id: 153,
-    variacaoId: "44444444-4444-4444-4444-444444444153",
+    variacaoId: "44444444-4444-8888-8888-000000000153",
     slug: "shorts-moletom-corte-a-fio",
     name: "Shorts Moletom Corte a Fio",
     category: "bermudas",
@@ -2257,7 +2257,7 @@ export const products = [
   },
   {
     id: 154,
-    variacaoId: "44444444-4444-4444-4444-444444444154",
+    variacaoId: "44444444-4444-8888-8888-000000000154",
     slug: "bermuda-veludo-cotele-beach",
     name: "Bermuda Veludo Cotelê Beach",
     category: "bermudas",
@@ -2271,7 +2271,7 @@ export const products = [
   },
   {
     id: 155,
-    variacaoId: "44444444-4444-4444-4444-444444444155",
+    variacaoId: "44444444-4444-8888-8888-000000000155",
     slug: "shorts-nylon-parachute-urban",
     name: "Shorts Nylon Parachute Urban",
     category: "bermudas",
@@ -2285,7 +2285,7 @@ export const products = [
   },
   {
     id: 156,
-    variacaoId: "44444444-4444-4444-4444-444444444156",
+    variacaoId: "44444444-4444-8888-8888-000000000156",
     slug: "bermuda-sarja-elastico-total",
     name: "Bermuda Sarja Elástico Total",
     category: "bermudas",
@@ -2299,7 +2299,7 @@ export const products = [
   },
   {
     id: 157,
-    variacaoId: "44444444-4444-4444-4444-444444444157",
+    variacaoId: "44444444-4444-8888-8888-000000000157",
     slug: "shorts-waffle-texturizado",
     name: "Shorts Waffle Texturizado",
     category: "bermudas",
@@ -2314,7 +2314,7 @@ export const products = [
   },
   {
     id: 158,
-    variacaoId: "44444444-4444-4444-4444-444444444158",
+    variacaoId: "44444444-4444-8888-8888-000000000158",
     slug: "bermuda-jeans-preta-estonada",
     name: "Bermuda Jeans Preta Estonada",
     category: "bermudas",
@@ -2328,7 +2328,7 @@ export const products = [
   },
   {
     id: 159,
-    variacaoId: "44444444-4444-4444-4444-444444444159",
+    variacaoId: "44444444-4444-8888-8888-000000000159",
     slug: "shorts-listrado-verao-maroto",
     name: "Shorts Listrado Verão Maroto",
     category: "bermudas",
@@ -2342,7 +2342,7 @@ export const products = [
   },
   {
     id: 160,
-    variacaoId: "44444444-4444-4444-4444-444444444160",
+    variacaoId: "44444444-4444-8888-8888-000000000160",
     slug: "bermuda-carpinteiro-sarja",
     name: "Bermuda Carpinteiro Sarja",
     category: "bermudas",
@@ -2356,7 +2356,7 @@ export const products = [
   },
   {
     id: 161,
-    variacaoId: "44444444-4444-4444-4444-444444444161",
+    variacaoId: "44444444-4444-8888-8888-000000000161",
     slug: "shorts-basquete-mesh-duplo",
     name: "Shorts Basquete Mesh Duplo",
     category: "bermudas",
@@ -2371,7 +2371,7 @@ export const products = [
   },
   {
     id: 162,
-    variacaoId: "44444444-4444-4444-4444-444444444162",
+    variacaoId: "44444444-4444-8888-8888-000000000162",
     slug: "kit-2-shorts-praia-role",
     name: "Kit 2 Shorts Praia & Rolê",
     category: "bermudas",
@@ -2386,7 +2386,7 @@ export const products = [
   },
   {
     id: 163,
-    variacaoId: "44444444-4444-4444-4444-444444444163",
+    variacaoId: "44444444-4444-8888-8888-000000000163",
     slug: "kit-3-cuecas-boxer-maroto",
     name: "Kit 3 Cuecas Boxer Maroto",
     category: "cuecas",
@@ -2401,7 +2401,7 @@ export const products = [
   },
   {
     id: 164,
-    variacaoId: "44444444-4444-4444-4444-444444444164",
+    variacaoId: "44444444-4444-8888-8888-000000000164",
     slug: "kit-3-meias-sorriso",
     name: "Kit 3 Meias Sorriso Cano Médio",
     category: "cuecas",
@@ -2416,7 +2416,7 @@ export const products = [
   },
   {
     id: 165,
-    variacaoId: "44444444-4444-4444-4444-444444444165",
+    variacaoId: "44444444-4444-8888-8888-000000000165",
     slug: "cueca-boxer-cacheada",
     name: "Cueca Boxer Microfibra Air",
     category: "cuecas",
@@ -2430,7 +2430,7 @@ export const products = [
   },
   {
     id: 166,
-    variacaoId: "44444444-4444-4444-4444-444444444166",
+    variacaoId: "44444444-4444-8888-8888-000000000166",
     slug: "samba-cancao-bolinhas",
     name: "Samba-Canção Bolinhas Clássica",
     category: "cuecas",
@@ -2444,7 +2444,7 @@ export const products = [
   },
   {
     id: 167,
-    variacaoId: "44444444-4444-4444-4444-444444444167",
+    variacaoId: "44444444-4444-8888-8888-000000000167",
     slug: "cueca-boxer-modal-pluma",
     name: "Cueca Boxer Modal Toque Pluma",
     category: "cuecas",
@@ -2459,7 +2459,7 @@ export const products = [
   },
   {
     id: 168,
-    variacaoId: "44444444-4444-4444-4444-444444444168",
+    variacaoId: "44444444-4444-8888-8888-000000000168",
     slug: "kit-5-cuecas-boxer-semana",
     name: "Kit 5 Cuecas Boxer Semana Completa",
     category: "cuecas",
@@ -2474,7 +2474,7 @@ export const products = [
   },
   {
     id: 169,
-    variacaoId: "44444444-4444-4444-4444-444444444169",
+    variacaoId: "44444444-4444-8888-8888-000000000169",
     slug: "samba-cancao-xadrez-leve",
     name: "Samba-Canção Xadrez Flanela Leve",
     category: "cuecas",
@@ -2488,7 +2488,7 @@ export const products = [
   },
   {
     id: 170,
-    variacaoId: "44444444-4444-4444-4444-444444444170",
+    variacaoId: "44444444-4444-8888-8888-000000000170",
     slug: "cueca-slip-classica-algodao",
     name: "Cueca Slip Clássica Algodão",
     category: "cuecas",
@@ -2502,7 +2502,7 @@ export const products = [
   },
   {
     id: 171,
-    variacaoId: "44444444-4444-4444-4444-444444444171",
+    variacaoId: "44444444-4444-8888-8888-000000000171",
     slug: "cueca-boxer-long-leg",
     name: "Cueca Boxer Long Leg Anti-Atrito",
     category: "cuecas",
@@ -2516,7 +2516,7 @@ export const products = [
   },
   {
     id: 172,
-    variacaoId: "44444444-4444-4444-4444-444444444172",
+    variacaoId: "44444444-4444-8888-8888-000000000172",
     slug: "meia-cano-alto-street-skate",
     name: "Meia Cano Alto Street Skate MM",
     category: "cuecas",
@@ -2530,7 +2530,7 @@ export const products = [
   },
   {
     id: 173,
-    variacaoId: "44444444-4444-4444-4444-444444444173",
+    variacaoId: "44444444-4444-8888-8888-000000000173",
     slug: "kit-3-meias-invisiveis",
     name: "Kit 3 Meias Invisíveis Sapatilha",
     category: "cuecas",
@@ -2545,7 +2545,7 @@ export const products = [
   },
   {
     id: 174,
-    variacaoId: "44444444-4444-4444-4444-444444444174",
+    variacaoId: "44444444-4444-8888-8888-000000000174",
     slug: "meia-estampada-atitude-mm",
     name: "Meia Estampada Raio & Atitude",
     category: "cuecas",
@@ -2559,7 +2559,7 @@ export const products = [
   },
   {
     id: 175,
-    variacaoId: "44444444-4444-4444-4444-444444444175",
+    variacaoId: "44444444-4444-8888-8888-000000000175",
     slug: "kit-3-cuecas-slip-essencial",
     name: "Kit 3 Cuecas Slip Essencial",
     category: "cuecas",
@@ -2574,7 +2574,7 @@ export const products = [
   },
   {
     id: 176,
-    variacaoId: "44444444-4444-4444-4444-444444444176",
+    variacaoId: "44444444-4444-8888-8888-000000000176",
     slug: "samba-cancao-listrada-resort",
     name: "Samba-Canção Listrada Resort",
     category: "cuecas",
@@ -2588,7 +2588,7 @@ export const products = [
   },
   {
     id: 177,
-    variacaoId: "44444444-4444-4444-4444-444444444177",
+    variacaoId: "44444444-4444-8888-8888-000000000177",
     slug: "cueca-boxer-sem-costura",
     name: "Cueca Boxer Sem Costura Seamless",
     category: "cuecas",
@@ -2602,7 +2602,7 @@ export const products = [
   },
   {
     id: 178,
-    variacaoId: "44444444-4444-4444-4444-444444444178",
+    variacaoId: "44444444-4444-8888-8888-000000000178",
     slug: "kit-6-meias-cano-curto",
     name: "Kit 6 Pares de Meias Cano Curto",
     category: "cuecas",
@@ -2617,7 +2617,7 @@ export const products = [
   },
   {
     id: 179,
-    variacaoId: "44444444-4444-4444-4444-444444444179",
+    variacaoId: "44444444-4444-8888-8888-000000000179",
     slug: "meia-inverno-la-termica",
     name: "Meia Inverno Lã Térmica",
     category: "cuecas",
@@ -2631,7 +2631,7 @@ export const products = [
   },
   {
     id: 180,
-    variacaoId: "44444444-4444-4444-4444-444444444180",
+    variacaoId: "44444444-4444-8888-8888-000000000180",
     slug: "kit-2-samba-cancao-mm",
     name: "Kit 2 Samba-Canção Menino Mau",
     category: "cuecas",
@@ -2646,7 +2646,7 @@ export const products = [
   },
   {
     id: 181,
-    variacaoId: "44444444-4444-4444-4444-444444444181",
+    variacaoId: "44444444-4444-8888-8888-000000000181",
     slug: "camiseta-dry-fit-treino-pesado",
     name: "Camiseta Dry-Fit Treino Pesado",
     category: "training",
@@ -2661,7 +2661,7 @@ export const products = [
   },
   {
     id: 182,
-    variacaoId: "44444444-4444-4444-4444-444444444182",
+    variacaoId: "44444444-4444-8888-8888-000000000182",
     slug: "bermuda-treino-leve",
     name: "Bermuda de Treino 4-Way Stretch",
     category: "training",
@@ -2675,7 +2675,7 @@ export const products = [
   },
   {
     id: 183,
-    variacaoId: "44444444-4444-4444-4444-444444444183",
+    variacaoId: "44444444-4444-8888-8888-000000000183",
     slug: "regata-treino-sem-desculpa",
     name: "Regata Treino Sem Desculpa",
     category: "training",
@@ -2689,7 +2689,7 @@ export const products = [
   },
   {
     id: 184,
-    variacaoId: "44444444-4444-4444-4444-444444444184",
+    variacaoId: "44444444-4444-8888-8888-000000000184",
     slug: "calca-jogger-treino",
     name: "Calça Jogger Treino Performance",
     category: "training",
@@ -2704,7 +2704,7 @@ export const products = [
   },
   {
     id: 185,
-    variacaoId: "44444444-4444-4444-4444-444444444185",
+    variacaoId: "44444444-4444-8888-8888-000000000185",
     slug: "meia-cano-alto-treino",
     name: "Meia Cano Alto Compressão Treino",
     category: "training",
@@ -2718,7 +2718,7 @@ export const products = [
   },
   {
     id: 186,
-    variacaoId: "44444444-4444-4444-4444-444444444186",
+    variacaoId: "44444444-4444-8888-8888-000000000186",
     slug: "camiseta-compressao-base-layer",
     name: "Camiseta Compressão Base Layer",
     category: "training",
@@ -2732,7 +2732,7 @@ export const products = [
   },
   {
     id: 187,
-    variacaoId: "44444444-4444-4444-4444-444444444187",
+    variacaoId: "44444444-4444-8888-8888-000000000187",
     slug: "shorts-corrida-2em1-liner",
     name: "Shorts Corrida 2 em 1 com Liner",
     category: "training",
@@ -2747,7 +2747,7 @@ export const products = [
   },
   {
     id: 188,
-    variacaoId: "44444444-4444-4444-4444-444444444188",
+    variacaoId: "44444444-4444-8888-8888-000000000188",
     slug: "corta-vento-running-refletivo",
     name: "Corta-Vento Running Refletivo",
     category: "training",
@@ -2761,7 +2761,7 @@ export const products = [
   },
   {
     id: 189,
-    variacaoId: "44444444-4444-4444-4444-444444444189",
+    variacaoId: "44444444-4444-8888-8888-000000000189",
     slug: "camiseta-manga-longa-uv50",
     name: "Camiseta Manga Longa UV50+ Surf & Run",
     category: "training",
@@ -2775,7 +2775,7 @@ export const products = [
   },
   {
     id: 190,
-    variacaoId: "44444444-4444-4444-4444-444444444190",
+    variacaoId: "44444444-4444-8888-8888-000000000190",
     slug: "regata-dryfit-nadador-airflow",
     name: "Regata Dry-Fit Nadador AirFlow",
     category: "training",
@@ -2790,7 +2790,7 @@ export const products = [
   },
   {
     id: 191,
-    variacaoId: "44444444-4444-4444-4444-444444444191",
+    variacaoId: "44444444-4444-8888-8888-000000000191",
     slug: "bermuda-moletinho-gym-cut",
     name: "Bermuda Moletinho Gym Cut",
     category: "training",
@@ -2804,7 +2804,7 @@ export const products = [
   },
   {
     id: 192,
-    variacaoId: "44444444-4444-4444-4444-444444444192",
+    variacaoId: "44444444-4444-8888-8888-000000000192",
     slug: "hoodie-treino-aquecimento-leve",
     name: "Hoodie Treino Aquecimento Leve",
     category: "training",
@@ -2818,7 +2818,7 @@ export const products = [
   },
   {
     id: 193,
-    variacaoId: "44444444-4444-4444-4444-444444444193",
+    variacaoId: "44444444-4444-8888-8888-000000000193",
     slug: "camiseta-oversized-pump-cover",
     name: "Camiseta Oversized Pump Cover",
     category: "training",
@@ -2833,7 +2833,7 @@ export const products = [
   },
   {
     id: 194,
-    variacaoId: "44444444-4444-4444-4444-444444444194",
+    variacaoId: "44444444-4444-8888-8888-000000000194",
     slug: "calca-legging-masculina-compressao",
     name: "Calça Legging Masculina Compressão",
     category: "training",
@@ -2847,7 +2847,7 @@ export const products = [
   },
   {
     id: 195,
-    variacaoId: "44444444-4444-4444-4444-444444444195",
+    variacaoId: "44444444-4444-8888-8888-000000000195",
     slug: "camiseta-raglan-cross-training",
     name: "Camiseta Raglan Cross Training",
     category: "training",
@@ -2861,7 +2861,7 @@ export const products = [
   },
   {
     id: 196,
-    variacaoId: "44444444-4444-4444-4444-444444444196",
+    variacaoId: "44444444-4444-8888-8888-000000000196",
     slug: "shorts-fight-treino-flex",
     name: "Shorts Fight & Treino Flex",
     category: "training",
@@ -2875,7 +2875,7 @@ export const products = [
   },
   {
     id: 197,
-    variacaoId: "44444444-4444-4444-4444-444444444197",
+    variacaoId: "44444444-4444-8888-8888-000000000197",
     slug: "kit-3-camisetas-dryfit-semana",
     name: "Kit 3 Camisetas Dry-Fit Semana",
     category: "training",
@@ -2890,7 +2890,7 @@ export const products = [
   },
   {
     id: 198,
-    variacaoId: "44444444-4444-4444-4444-444444444198",
+    variacaoId: "44444444-4444-8888-8888-000000000198",
     slug: "bolsa-duffel-academia-mm",
     name: "Bolsa Duffel Academia MM",
     category: "training",
@@ -2904,7 +2904,7 @@ export const products = [
   },
   {
     id: 199,
-    variacaoId: "44444444-4444-4444-4444-444444444199",
+    variacaoId: "44444444-4444-8888-8888-000000000199",
     slug: "bone-menino-mau",
     name: "Boné Menino Mau Aba Curva",
     category: "acessorios",
@@ -2919,7 +2919,7 @@ export const products = [
   },
   {
     id: 200,
-    variacaoId: "44444444-4444-4444-4444-444444444200",
+    variacaoId: "44444444-4444-8888-8888-000000000200",
     slug: "mochila-campus",
     name: "Mochila Campus Notebook 15\"",
     category: "acessorios",
@@ -2934,7 +2934,7 @@ export const products = [
   },
   {
     id: 201,
-    variacaoId: "44444444-4444-4444-4444-444444444201",
+    variacaoId: "44444444-4444-8888-8888-000000000201",
     slug: "gorro-cacheado",
     name: "Gorro Cacheado Tricô",
     category: "acessorios",
@@ -2948,7 +2948,7 @@ export const products = [
   },
   {
     id: 202,
-    variacaoId: "44444444-4444-4444-4444-444444444202",
+    variacaoId: "44444444-4444-8888-8888-000000000202",
     slug: "bucket-hat-maroto",
     name: "Bucket Hat Maroto Festival",
     category: "acessorios",
@@ -2962,7 +2962,7 @@ export const products = [
   },
   {
     id: 203,
-    variacaoId: "44444444-4444-4444-4444-444444444203",
+    variacaoId: "44444444-4444-8888-8888-000000000203",
     slug: "pochete-role",
     name: "Shoulder Bag / Pochete Rolê",
     category: "acessorios",
@@ -2977,7 +2977,7 @@ export const products = [
   },
   {
     id: 204,
-    variacaoId: "44444444-4444-4444-4444-444444444204",
+    variacaoId: "44444444-4444-8888-8888-000000000204",
     slug: "oculos-sol-sem-filtro",
     name: "Óculos de Sol Sem Filtro UV400",
     category: "acessorios",
@@ -2991,7 +2991,7 @@ export const products = [
   },
   {
     id: 205,
-    variacaoId: "44444444-4444-4444-4444-444444444205",
+    variacaoId: "44444444-4444-8888-8888-000000000205",
     slug: "carteira-slim-mm",
     name: "Carteira Slim Couro MM",
     category: "acessorios",
@@ -3005,7 +3005,7 @@ export const products = [
   },
   {
     id: 206,
-    variacaoId: "44444444-4444-4444-4444-444444444206",
+    variacaoId: "44444444-4444-8888-8888-000000000206",
     slug: "cinto-couro-dupla-face",
     name: "Cinto Couro Dupla Face Fivela",
     category: "acessorios",
@@ -3020,7 +3020,7 @@ export const products = [
   },
   {
     id: 207,
-    variacaoId: "44444444-4444-4444-4444-444444444207",
+    variacaoId: "44444444-4444-8888-8888-000000000207",
     slug: "relogio-analogico-minimal-noir",
     name: "Relógio Analógico Minimal Noir",
     category: "acessorios",
@@ -3035,7 +3035,7 @@ export const products = [
   },
   {
     id: 208,
-    variacaoId: "44444444-4444-4444-4444-444444444208",
+    variacaoId: "44444444-4444-8888-8888-000000000208",
     slug: "corrente-veneziana-aco-inox",
     name: "Corrente Veneziana Aço Inox",
     category: "acessorios",
@@ -3049,7 +3049,7 @@ export const products = [
   },
   {
     id: 209,
-    variacaoId: "44444444-4444-4444-4444-444444444209",
+    variacaoId: "44444444-4444-8888-8888-000000000209",
     slug: "bone-five-panel-streetwear",
     name: "Boné Five Panel Streetwear",
     category: "acessorios",
@@ -3063,7 +3063,7 @@ export const products = [
   },
   {
     id: 210,
-    variacaoId: "44444444-4444-4444-4444-444444444210",
+    variacaoId: "44444444-4444-8888-8888-000000000210",
     slug: "bone-trucker-telinha-brisa",
     name: "Boné Trucker Telinha Brisa",
     category: "acessorios",
@@ -3077,7 +3077,7 @@ export const products = [
   },
   {
     id: 211,
-    variacaoId: "44444444-4444-4444-4444-444444444211",
+    variacaoId: "44444444-4444-8888-8888-000000000211",
     slug: "cinto-tatico-lona-engate",
     name: "Cinto Tático Lona Engate Rápido",
     category: "acessorios",
@@ -3091,7 +3091,7 @@ export const products = [
   },
   {
     id: 212,
-    variacaoId: "44444444-4444-4444-4444-444444444212",
+    variacaoId: "44444444-4444-8888-8888-000000000212",
     slug: "oculos-retro-redondo-fume",
     name: "Óculos Retrô Redondo Lente Fumê",
     category: "acessorios",
@@ -3106,7 +3106,7 @@ export const products = [
   },
   {
     id: 213,
-    variacaoId: "44444444-4444-4444-4444-444444444213",
+    variacaoId: "44444444-4444-8888-8888-000000000213",
     slug: "porta-cartoes-magnetico-rfid",
     name: "Porta-Cartões Magnético RFID",
     category: "acessorios",
@@ -3120,7 +3120,7 @@ export const products = [
   },
   {
     id: 214,
-    variacaoId: "44444444-4444-4444-4444-444444444214",
+    variacaoId: "44444444-4444-8888-8888-000000000214",
     slug: "gorro-pescador-short-beanie",
     name: "Gorro Pescador Short Beanie",
     category: "acessorios",
@@ -3134,7 +3134,7 @@ export const products = [
   },
   {
     id: 215,
-    variacaoId: "44444444-4444-4444-4444-444444444215",
+    variacaoId: "44444444-4444-8888-8888-000000000215",
     slug: "pulseira-couro-trancado-aco",
     name: "Pulseira Couro Trançado & Aço",
     category: "acessorios",
@@ -3149,7 +3149,7 @@ export const products = [
   },
   {
     id: 216,
-    variacaoId: "44444444-4444-4444-4444-444444444216",
+    variacaoId: "44444444-4444-8888-8888-000000000216",
     slug: "bag-transversal-impermeavel-pro",
     name: "Bag Transversal Impermeável Pro",
     category: "acessorios",

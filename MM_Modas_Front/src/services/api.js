@@ -9,7 +9,7 @@ import { products as localProducts, categories as localCategories } from '../dat
 import { calcularFreteLocal, CUPONS, FRETE_GRATIS_A_PARTIR } from '../context/cartConfig.js'
 import { onlyDigits } from '../utils/validators.js'
 
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api'
+const API_BASE_URL = import.meta.env?.VITE_API_URL ?? 'http://localhost:8080/api'
 const TOKEN_KEY = 'mm-modas:tokens'
 const LOCAL_ACCOUNTS_KEY = 'mm-modas:contas-locais'
 const LOCAL_ORDERS_KEY = 'mm-modas:pedidos-locais'
