@@ -29,7 +29,7 @@ function Footer() {
             <a href="https://tiktok.com" target="_blank" rel="noreferrer" aria-label="TikTok">
               <TiktokIcon />
             </a>
-            <a href="https://wa.me/5581900000000" target="_blank" rel="noreferrer" aria-label="WhatsApp">
+            <a href="https://wa.me/558183008683" target="_blank" rel="noreferrer" aria-label="WhatsApp">
               <WhatsIcon />
             </a>
           </div>
@@ -39,7 +39,7 @@ function Footer() {
         <div>
           <h4>Coleção</h4>
           <ul>
-            {categories.map((c) => (
+            {categories.slice(0, 8).map((c) => (
               <li key={c.id}>
                 <Link to={`/loja?categoria=${c.id}`}>{c.name}</Link>
               </li>

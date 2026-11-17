@@ -132,8 +132,8 @@ function Contact() {
         <aside className="contact__side">
           <div className="contact__channels">
             <h2>Outros canais</h2>
-            <a href="https://wa.me/5581900000000" target="_blank" rel="noreferrer" className="channel">
-              <WhatsIcon /> <span>WhatsApp<small>(81) 90000-0000</small></span>
+            <a href="https://wa.me/558183008683" target="_blank" rel="noreferrer" className="channel">
+              <WhatsIcon /> <span>WhatsApp<small>+55 81 8300-8683</small></span>
             </a>
             <a href="https://instagram.com" target="_blank" rel="noreferrer" className="channel">
               <InstagramIcon /> <span>Instagram<small>@mm.modas</small></span>

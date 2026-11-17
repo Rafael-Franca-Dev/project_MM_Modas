@@ -49,53 +49,7 @@
   font-size: 17px;
   color: var(--ink-soft);
   max-width: 440px;
-  margin-bottom: var(--space-4);
-}
-
-/* Barra do carrossel de mensagens aleatórias no Hero */
-.hero__carousel-bar {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
   margin-bottom: var(--space-5);
-}
-
-.hero__dots {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.hero__dot {
-  width: 10px;
-  height: 10px;
-  padding: 0;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid var(--roxo-900);
-  background: var(--roxo-100);
-  cursor: pointer;
-  transition: width 0.2s ease, background 0.2s ease;
-}
-
-.hero__dot--active {
-  width: 26px;
-  background: var(--roxo-600);
-}
-
-.hero__shuffle {
-  padding: 4px 12px;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid var(--roxo-900);
-  background: var(--laranja-100);
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.15s ease, transform 0.15s ease;
-}
-
-.hero__shuffle:hover {
-  background: var(--laranja-300);
-  transform: translateY(-1px);
 }
 
 .hero__cta {
@@ -268,7 +222,7 @@
 
 /* ---------- 3. CATEGORIAS ---------- */
 
-/* 12 categorias = 4 colunas x 3 linhas no desktop */
+/* 8 categorias na Home = 4 colunas x 2 linhas no desktop */
 .categories {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

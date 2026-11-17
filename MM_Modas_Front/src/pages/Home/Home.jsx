@@ -1,7 +1,7 @@
 // =========================================================
 // Home — página inicial (/) — MM MODAS
 // =========================================================
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Mascot from '../../components/Logo/Mascot.jsx'
 import ProductArt from '../../components/ProductArt/ProductArt.jsx'
@@ -11,7 +11,7 @@ import { useCatalog } from '../../context/CatalogContext.jsx'
 import { isEmail } from '../../utils/validators.js'
 import './Home.css'
 
-// Mensagens aleatórias que aparecem no primeiro contato com o usuário (Hero / Carrossel)
+// Mensagens aleatórias que podem aparecer no primeiro contato com o usuário (sorteada automaticamente ao carregar)
 const heroMessages = [
   {
     eyebrow: 'MM MODAS · Coleção Masculina 2026',
@@ -27,8 +27,8 @@ const heroMessages = [
     eyebrow: 'MM MODAS · Streetwear & Essenciais',
     titleBefore: 'Básico sem graça?',
     highlight: 'Passa longe.',
-    lead: 'Mais de 200 peças em 12 categorias: de T-shirts oversized e moletons pesados a bermudas, cuecas e jaquetas feitas para dominar qualquer rolê.',
-    stickerOne: '12 categorias',
+    lead: 'Mais de 200 peças pensadas para você: de T-shirts oversized e moletons pesados a bermudas, cuecas e jaquetas feitas para dominar qualquer rolê.',
+    stickerOne: 'algodão premium',
     stickerTwo: '+200 peças ✦',
     floatLeft: 'hoodie',
     floatRight: 'sunglasses',
@@ -107,32 +107,12 @@ const pillars = [
 
 function Home() {
   const { categories, products } = useCatalog()
+  // Exibe apenas 8 categorias de roupas na Home (o catálogo completo fica em /loja)
+  const homeCategories = categories.slice(0, 8)
   const novidades = products.filter((p) => p.tags.includes('novo')).slice(0, 8)
 
-  // Escolhe uma mensagem aleatória logo no primeiro contato e permite alternar no carrossel
-  const [msgIndex, setMsgIndex] = useState(() => Math.floor(Math.random() * heroMessages.length))
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setMsgIndex((prev) => {
-        if (heroMessages.length <= 1) return prev
-        let next = Math.floor(Math.random() * heroMessages.length)
-        if (next === prev) next = (prev + 1) % heroMessages.length
-        return next
-      })
-    }, 6500)
-    return () => clearInterval(timer)
-  }, [])
-
-  const pickRandomMessage = () => {
-    setMsgIndex((prev) => {
-      let next = Math.floor(Math.random() * heroMessages.length)
-      if (next === prev) next = (prev + 1) % heroMessages.length
-      return next
-    })
-  }
-
-  const currentHero = heroMessages[msgIndex] ?? heroMessages[0]
+  // Sorteia automaticamente uma mensagem aleatória ao carregar (sem controles manuais para o usuário)
+  const [currentHero] = useState(() => heroMessages[Math.floor(Math.random() * heroMessages.length)] ?? heroMessages[0])
 
   const [email, setEmail] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -150,7 +130,7 @@ function Home() {
 
   return (
     <>
-      {/* ---------- 1. HERO (MM MODAS + Mensagens Aleatórias) ---------- */}
+      {/* ---------- 1. HERO (MM MODAS + Mensagem Aleatória) ---------- */}
       <section className="hero">
         <div className="container hero__inner">
           <div className="hero__text">
@@ -159,26 +139,6 @@ function Home() {
               {currentHero.titleBefore} <span className="hero__highlight">{currentHero.highlight}</span>
             </h1>
             <p className="hero__lead">{currentHero.lead}</p>
-
-            <div className="hero__carousel-bar" aria-label="Mensagens da MM MODAS">
-              <div className="hero__dots" role="tablist">
-                {heroMessages.map((m, idx) => (
-                  <button
-                    key={m.highlight}
-                    type="button"
-                    role="tab"
-                    aria-selected={idx === msgIndex}
-                    aria-label={`Mensagem ${idx + 1}`}
-                    className={`hero__dot ${idx === msgIndex ? 'hero__dot--active' : ''}`}
-                    onClick={() => setMsgIndex(idx)}
-                  />
-                ))}
-              </div>
-              <button type="button" className="hero__shuffle" onClick={pickRandomMessage}>
-                ↻ Outra frase
-              </button>
-            </div>
-
             <div className="hero__cta">
               <Link to="/loja" className="btn btn--primary">
                 Ver a coleção <ArrowIcon size={18} />
@@ -217,21 +177,21 @@ function Home() {
         </div>
       </div>
 
-      {/* ---------- 3. CATEGORIAS ---------- */}
+      {/* ---------- 3. CATEGORIAS (8 categorias na Home -> levam ao Catálogo) ---------- */}
       <section className="section">
         <div className="container">
           <div className="section-head">
             <div>
-              <span className="eyebrow">Escolha sua vibe · {categories.length} Categorias</span>
-              <h2 className="section-title">Categorias MM MODAS</h2>
+              <span className="eyebrow">Escolha sua vibe</span>
+              <h2 className="section-title">Categorias</h2>
             </div>
             <Link to="/loja" className="link-arrow">
-              Ver todas as {products.length} peças <ArrowIcon size={18} />
+              Ver tudo no catálogo <ArrowIcon size={18} />
             </Link>
           </div>
 
           <div className="categories">
-            {categories.map((c) => (
+            {homeCategories.map((c) => (
               <Link key={c.id} to={`/loja?categoria=${c.id}`} className="category" style={{ background: c.bg }}>
                 <ProductArt type={c.art} color="#fff" bg="transparent" className="category__art" />
                 <span className="category__name">{c.name}</span>
