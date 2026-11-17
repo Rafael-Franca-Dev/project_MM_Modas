@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="600" height="600">
+  <defs>
+    <radialGradient id="studioGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#2c1f4a" flood-opacity="0.18"/>
+    </filter>
+    
+  </defs>
+  <circle cx="200" cy="195" r="175" fill="url(#studioGlow)"/>
+  <ellipse cx="200" cy="368" rx="96" ry="12" fill="#2c1f4a" opacity="0.12"/>
+  <g filter="url(#dropShadow)">
+    
+      <path d="M135 72 L82 92 L32 155 L78 202 L110 178 L110 335 L290 335 L290 178 L322 202 L368 155 L318 92 L265 72 Q200 112 135 72 Z" fill="#ffc596" stroke="#2c1f4a" stroke-width="5.5" stroke-linejoin="round"/>
+      
+      
+      <g transform="translate(200, 90)">
+    <rect x="-18" y="-8" width="36" height="14" rx="3" fill="#2c1f4a"/>
+    <text x="0" y="2" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="900" font-size="8" fill="#ffc596" letter-spacing="1">MM</text>
+  </g>
+      <path d="M142 74 Q200 116 258 74" fill="none" stroke="#2c1f4a" stroke-width="5"/>
+      
+      
+      <g transform="translate(200, 195)">
+      <circle cx="0" cy="-6" r="32" fill="#ffaa6b" stroke="#2c1f4a" stroke-width="2.5"/>
+      <path d="M-42 6 Q-20 -2 0 6 T42 6" fill="none" stroke="#2c1f4a" stroke-width="4" stroke-linecap="round"/>
+      <path d="M-36 18 Q-18 10 0 18 T36 18" fill="none" stroke="#bcd3f2" stroke-width="4" stroke-linecap="round"/>
+      <text x="0" y="42" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="900" font-size="12" fill="#2c1f4a" letter-spacing="3">MM · SOLAR</text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="600" height="600">
+  <defs>
+    <radialGradient id="studioGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#2c1f4a" flood-opacity="0.18"/>
+    </filter>
+    
+  </defs>
+  <circle cx="200" cy="195" r="175" fill="url(#studioGlow)"/>
+  <ellipse cx="200" cy="368" rx="96" ry="12" fill="#2c1f4a" opacity="0.12"/>
+  <g filter="url(#dropShadow)">
+    
+      <path d="M138 56 L214 56 L214 236 Q214 278 262 282 L302 282 Q340 286 340 320 Q340 354 300 354 L208 354 Q138 354 138 278 Z" fill="#fbf6ee" stroke="#2c1f4a" stroke-width="5.5" stroke-linejoin="round"/>
+      <rect x="138" y="88" width="76" height="20" fill="#2c1f4a" stroke="#2c1f4a" stroke-width="4"/>
+      <rect x="138" y="118" width="76" height="20" fill="#2c1f4a"/>
+      <text x="176" y="176" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="900" font-size="22" fill="#2c1f4a">MM</text>
+  </g>
+</svg>
