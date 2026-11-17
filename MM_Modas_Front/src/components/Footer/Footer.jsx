@@ -1,5 +1,5 @@
 // =========================================================
-// Footer — rodapé do site MM GAMES
+// Footer — rodapé do site MM MODAS
 // =========================================================
 import { Link } from 'react-router-dom'
 import Logo from '../Logo/Logo.jsx'
@@ -19,8 +19,8 @@ function Footer() {
         <div className="footer__brand">
           <Logo size={52} light />
           <p>
-            Jogos de tabuleiro, RPG de mesa e card games pra quem não joga no modo automático. Feito com
-            estratégia (e um pouquinho de caos).
+            Moda masculina e acessórios com personalidade pra quem não cabe em rótulo. T-shirts, moletons,
+            calças, bermudas e cuecas feitas com conforto e atitude.
           </p>
           <div className="footer__social">
             <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
@@ -37,7 +37,7 @@ function Footer() {
 
         {/* Coluna 2: categorias */}
         <div>
-          <h4>Catálogo</h4>
+          <h4>Coleção</h4>
           <ul>
             {categories.map((c) => (
               <li key={c.id}>
@@ -49,7 +49,7 @@ function Footer() {
 
         {/* Coluna 3: institucional */}
         <div>
-          <h4>MM GAMES</h4>
+          <h4>MM MODAS</h4>
           <ul>
             <li><Link to="/sobre">Nossa história</Link></li>
             <li><Link to="/contato">Fale com a gente</Link></li>
@@ -76,7 +76,7 @@ function Footer() {
 
       <div className="footer__bottom">
         <div className="container">
-          <p>© {year} MM GAMES · Jogos & RPG · Menino Mau aprova.</p>
+          <p>© {year} MM MODAS · Moda Masculina & Acessórios · Menino Mau aprova.</p>
         </div>
       </div>
     </footer>

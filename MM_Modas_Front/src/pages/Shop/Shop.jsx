@@ -1,5 +1,5 @@
 // =========================================================
-// Shop — catálogo completo (/loja) — MM GAMES
+// Shop — catálogo completo (/loja) — MM MODAS
 // ---------------------------------------------------------
 // Consome a API do Back-end (/api/produtos) com fallback
 // imediato para o catálogo local em data/products.js.
@@ -50,16 +50,16 @@ function Shop() {
 
   const title =
     activeCategory === 'todas'
-      ? 'Todo o catálogo'
-      : (categories.find((c) => c.id === activeCategory)?.name ?? 'Catálogo')
+      ? 'Toda a coleção'
+      : (categories.find((c) => c.id === activeCategory)?.name ?? 'Coleção')
 
   return (
     <div className="container shop">
       <header className="page-head">
-        <span className="eyebrow">Catálogo MM GAMES</span>
+        <span className="eyebrow">Coleção MM MODAS</span>
         <h1>{title}</h1>
         <p className="muted">
-          {visible.length} {visible.length === 1 ? 'jogo encontrado' : 'jogos encontrados'}
+          {visible.length} {visible.length === 1 ? 'peça encontrada' : 'peças encontradas'}
         </p>
         {user?.tipo === 'funcionario' && (
           <p style={{ marginTop: '12px' }}>
@@ -88,10 +88,10 @@ function Shop() {
       <div className="shop__toolbar">
         <label className="shop__search">
           <SearchIcon size={18} />
-          <span className="sr-only">Buscar jogo</span>
+          <span className="sr-only">Buscar peça</span>
           <input
             type="search"
-            placeholder="Buscar jogo, RPG ou acessório..."
+            placeholder="Buscar t-shirt, moletom, calça, cueca, acessório..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -123,8 +123,8 @@ function Shop() {
       ) : (
         <div className="shop__empty">
           <Mascot size={110} title="" />
-          <h2>Nada nessa masmorra…</h2>
-          <p className="muted">O Menino Mau escondeu o loot? Tenta outra busca ou limpa os filtros.</p>
+          <h2>Nenhuma peça por aqui…</h2>
+          <p className="muted">O Menino Mau escondeu esse look? Tenta outra busca ou limpa os filtros.</p>
           <button
             type="button"
             className="btn btn--accent"

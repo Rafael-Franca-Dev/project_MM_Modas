@@ -1,6 +1,6 @@
-# MM GAMES — Front-end & Integração
+# MM MODAS — Front-end & Integração
 
-E-commerce de jogos de tabuleiro, RPG de mesa, card games e acessórios com personalidade. O nome vem do mascote da marca: **Menino Mau**.
+E-commerce de moda masculina e acessórios com personalidade: T-shirts, camisetas, polos, camisas, moletons, tricô, jaquetas, calças, bermudas, cuecas, linha fitness e acessórios (12 categorias e mais de 200 itens). O nome vem do mascote da marca: **Menino Mau**.
 
 Stack: **React 19 · JavaScript · CSS tradicional · Vite · React Router 7 · Integração REST com Spring Boot + Fallback Local**.
 

@@ -1,5 +1,5 @@
 /* =========================================================
-   Home — estilos da página inicial (MM GAMES)
+   Home — estilos da página inicial (MM MODAS)
    ========================================================= */
 
 /* ---------- 1. HERO ---------- */
@@ -11,18 +11,18 @@
 }
 
 .hero .hero__inner {
-  max-width: calc(var(--container) * 2 / 3);
+  max-width: calc(var(--container) * 3 / 4);
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: 1.15fr 1fr;
   align-items: center;
   gap: var(--space-6);
 }
 
 .hero__title {
-  font-size: clamp(34px, 5vw, 58px);
+  font-size: clamp(34px, 5vw, 56px);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 0.98;
+  line-height: 1.02;
   margin-bottom: var(--space-4);
 }
 
@@ -48,8 +48,54 @@
 .hero__lead {
   font-size: 17px;
   color: var(--ink-soft);
-  max-width: 380px;
+  max-width: 440px;
+  margin-bottom: var(--space-4);
+}
+
+/* Barra do carrossel de mensagens aleatórias no Hero */
+.hero__carousel-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
   margin-bottom: var(--space-5);
+}
+
+.hero__dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero__dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--roxo-900);
+  background: var(--roxo-100);
+  cursor: pointer;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+
+.hero__dot--active {
+  width: 26px;
+  background: var(--roxo-600);
+}
+
+.hero__shuffle {
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--roxo-900);
+  background: var(--laranja-100);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.hero__shuffle:hover {
+  background: var(--laranja-300);
+  transform: translateY(-1px);
 }
 
 .hero__cta {
@@ -222,10 +268,10 @@
 
 /* ---------- 3. CATEGORIAS ---------- */
 
-/* 6 categorias = 3 colunas x 2 linhas */
+/* 12 categorias = 4 colunas x 3 linhas no desktop */
 .categories {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
 }
 
@@ -246,7 +292,7 @@
 }
 
 .category__art {
-  width: 72%;
+  width: 68%;
 }
 
 .category__art::before {
@@ -256,7 +302,7 @@
 .category__name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 17px;
+  font-size: 16px;
   text-align: center;
 }
 
@@ -382,6 +428,9 @@
 @media (max-width: 1024px) {
   .manifesto {
     grid-template-columns: 1fr;
+  }
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

@@ -13,7 +13,7 @@ import { apiValidateCoupon } from '../services/api.js'
 
 const CartContext = createContext(null)
 
-const STORAGE_KEY = 'mm-games:carrinho'
+const STORAGE_KEY = 'mm-modas:carrinho'
 
 // Identifica cada linha por ID + edição + cor/tema
 function itemKey({ id, size, colorName }) {

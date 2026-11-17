@@ -1,5 +1,5 @@
 // =========================================================
-// Ponto de entrada da aplicação — MM GAMES
+// Ponto de entrada da aplicação — MM MODAS
 // ---------------------------------------------------------
 // Monta o React dentro da <div id="root"> do index.html e
 // envolve o App com os provedores globais desacoplados:

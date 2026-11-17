@@ -1,5 +1,5 @@
 // =========================================================
-// Cart — carrinho de compras (/carrinho) — MM GAMES
+// Cart — carrinho de compras (/carrinho) — MM MODAS
 // =========================================================
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -38,9 +38,9 @@ function Cart() {
         <div className="cart-empty">
           <Mascot size={140} title="" />
           <h1>Seu carrinho tá vazio</h1>
-          <p className="muted">Nem o Menino Mau aguenta uma mesa sem jogo. Bora escolher a próxima campanha?</p>
+          <p className="muted">Nem o Menino Mau sai de casa sem estilo. Bora escolher suas peças na MM MODAS?</p>
           <Link to="/loja" className="btn btn--primary">
-            Explorar catálogo
+            Ver a coleção
           </Link>
         </div>
       </div>
@@ -53,7 +53,7 @@ function Cart() {
   return (
     <div className="container">
       <header className="page-head">
-        <span className="eyebrow">Seu loot</span>
+        <span className="eyebrow">Sua sacola · MM MODAS</span>
         <h1>Carrinho</h1>
       </header>
 
@@ -84,7 +84,7 @@ function Cart() {
                   {item.name}
                 </Link>
                 <p className="muted">
-                  Edição: {item.size}
+                  Tamanho: {item.size}
                   {item.colorName ? ` · ${item.colorName}` : ''}
                 </p>
                 <div className="cart-item__controls">
@@ -168,7 +168,7 @@ function Cart() {
             {user ? 'Finalizar compra' : 'Entrar e finalizar'}
           </button>
           <Link to="/loja" className="summary__continue">
-            Continuar explorando
+            Continuar comprando
           </Link>
         </aside>
       </div>

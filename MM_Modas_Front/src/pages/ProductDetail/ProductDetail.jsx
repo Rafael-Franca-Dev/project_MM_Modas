@@ -1,10 +1,9 @@
 // =========================================================
-// ProductDetail — página de um jogo/RPG (/produto/:slug)
+// ProductDetail — página de uma peça (/produto/:slug) — MM MODAS
 // ---------------------------------------------------------
-// Exibe ilustração/foto, preço, descrição, seletor de tema
-// (quando o item possui múltiplas cores de arte) e seletor
-// de edição (Padrão, Deluxe, Físico + PDF...), além de
-// sugestões da mesma categoria ("Combina na mesa").
+// Exibe ilustração/foto, preço, descrição, seletor de cor
+// e seletor de tamanho, além de sugestões da mesma categoria
+// ("Combina com").
 // =========================================================
 import { useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
@@ -77,7 +76,7 @@ function ProductView({ product }) {
       </button>
 
       <nav className="breadcrumb" aria-label="Você está em">
-        <Link to="/">Início</Link> / <Link to="/loja">Catálogo</Link> /{' '}
+        <Link to="/">Início</Link> / <Link to="/loja">Coleção</Link> /{' '}
         <Link to={`/loja?categoria=${product.category}`}>{getCategoryName(product.category)}</Link> /{' '}
         <span aria-current="page">{product.name}</span>
       </nav>
@@ -96,7 +95,7 @@ function ProductView({ product }) {
 
         <div className="pdp__info">
           <div className="pdp__tags">
-            {product.tags.includes('novo') && <span className="tag">Destaque</span>}
+            {product.tags.includes('novo') && <span className="tag">Novo</span>}
             <span className="tag" style={{ background: outOfStock ? '#fee2e2' : 'var(--roxo-100)', color: outOfStock ? '#991b1b' : 'var(--roxo-900)' }}>
               {outOfStock ? 'Esgotado' : `${stock} un. disponíveis`}
             </span>
@@ -114,7 +113,7 @@ function ProductView({ product }) {
           {product.colors.length > 1 && (
             <fieldset className="pdp__group">
               <legend>
-                Tema / Acabamento: <strong>{color.name}</strong>
+                Cor: <strong>{color.name}</strong>
               </legend>
               <div className="pdp__swatches">
                 {product.colors.map((c) => (
@@ -135,7 +134,7 @@ function ProductView({ product }) {
 
           <fieldset className="pdp__group">
             <legend>
-              Edição{size && <>: <strong>{size}</strong></>}
+              Tamanho{size && <>: <strong>{size}</strong></>}
             </legend>
             <div className="pdp__sizes">
               {product.sizes.map((s) => (
@@ -153,7 +152,7 @@ function ProductView({ product }) {
                 </button>
               ))}
             </div>
-            {sizeError && <p className="field-error">Escolha a edição primeiro para continuar!</p>}
+            {sizeError && <p className="field-error">Escolha o tamanho primeiro para continuar!</p>}
           </fieldset>
 
           <div className="pdp__buy">
@@ -191,14 +190,14 @@ function ProductView({ product }) {
               <TruckIcon size={20} /> Frete grátis acima de R$ 299
             </li>
             <li>
-              <RefreshIcon size={20} /> Embalagem blindada e reposição de peças
+              <RefreshIcon size={20} /> Primeira troca grátis em até 30 dias
             </li>
           </ul>
         </div>
       </section>
 
       <section className="section">
-        <h2 className="section-title">Combina na mesa</h2>
+        <h2 className="section-title">Combina com</h2>
         <div className="product-grid">
           {(related.length ? related : fallback).map((p) => (
             <ProductCard key={p.id} product={p} />

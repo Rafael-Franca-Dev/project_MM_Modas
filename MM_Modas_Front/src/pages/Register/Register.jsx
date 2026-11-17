@@ -47,14 +47,18 @@ const initialForm = {
 }
 
 const CATEGORY_ART_OPTIONS = [
-  { value: 'd20', label: 'Dado D20' },
-  { value: 'board', label: 'Tabuleiro' },
-  { value: 'chess', label: 'Estratégia / Xadrez' },
-  { value: 'cards', label: 'Cartas / TCG' },
-  { value: 'meeple', label: 'Meeple / Party' },
-  { value: 'tower', label: 'Torre de Dados' },
-  { value: 'rpgbook', label: 'Livro de RPG' },
-  { value: 'shield', label: 'Escudo do Mestre' },
+  { value: 'oversized', label: 'T-Shirt Oversized' },
+  { value: 'tee', label: 'Camiseta Clássica' },
+  { value: 'polo', label: 'Camisa Polo' },
+  { value: 'shirt', label: 'Camisa de Botão' },
+  { value: 'hoodie', label: 'Moletom / Hoodie' },
+  { value: 'sweater', label: 'Suéter / Tricô' },
+  { value: 'jacket', label: 'Jaqueta / Casaco' },
+  { value: 'pants', label: 'Calça Cargo / Jeans' },
+  { value: 'shorts', label: 'Bermuda / Shorts' },
+  { value: 'boxer', label: 'Cueca Boxer' },
+  { value: 'dryfit', label: 'Camiseta Treino / Dry-Fit' },
+  { value: 'cap', label: 'Boné / Acessório' },
 ]
 
 const CATEGORY_BG_OPTIONS = [
@@ -262,7 +266,7 @@ function Register() {
 
   // Estados do Painel da Equipe
   const [newCatName, setNewCatName] = useState('')
-  const [newCatArt, setNewCatArt] = useState('d20')
+  const [newCatArt, setNewCatArt] = useState('tee')
   const [newCatBg, setNewCatBg] = useState('var(--laranja-200)')
   const [catError, setCatError] = useState('')
   const [staffSearch, setStaffSearch] = useState('')
@@ -299,12 +303,12 @@ function Register() {
     return (
       <div className="container">
         <header className="page-head">
-          <span className="eyebrow">{user.tipo === 'funcionario' ? 'Conta da equipe MM' : 'Conta de jogador'}</span>
+          <span className="eyebrow">{user.tipo === 'funcionario' ? 'Conta da equipe MM MODAS' : 'Conta de cliente MM MODAS'}</span>
           <h1>Olá, {user.nome.split(' ')[0]}!</h1>
           <p className="muted">
             {user.tipo === 'funcionario'
               ? 'Gerencie categorias, valores, descontos e estoque diretamente pelo painel da equipe.'
-              : 'Sua conta está ativa e pronta para a próxima campanha.'}
+              : 'Sua conta está ativa e pronta para renovar o guarda-roupa.'}
           </p>
         </header>
 
@@ -380,7 +384,7 @@ function Register() {
                     setCatError('')
                   }}
                   error={catError}
-                  inputProps={{ placeholder: 'Ex.: Miniaturas & Pintura' }}
+                  inputProps={{ placeholder: 'Ex.: Alfaiataria & Blazers' }}
                 />
 
                 <div className="field">
@@ -538,7 +542,7 @@ function Register() {
     setSubmitting(true)
     try {
       await register(data)
-      showToast(`Cadastro feito! Bem-vindo à guilda, ${form.nome.split(' ')[0]}.`)
+      showToast(`Cadastro feito! Bem-vindo à MM MODAS, ${form.nome.split(' ')[0]}.`)
       if (from) navigate(from, { replace: true })
     } catch (error) {
       setAuthError(error.message || 'Erro ao criar conta.')
@@ -575,12 +579,12 @@ function Register() {
   return (
     <div className="container">
       <header className="page-head">
-        <span className="eyebrow">Acesso MM GAMES</span>
-        <h1>{mode === 'login' ? 'Bem-vindo de volta' : 'Entra pra guilda'}</h1>
+        <span className="eyebrow">Acesso MM MODAS</span>
+        <h1>{mode === 'login' ? 'Bem-vindo de volta' : 'Entra pra turma'}</h1>
         <p className="muted">
           {mode === 'login'
             ? 'Acesse sua conta com e-mail e senha cadastrados.'
-            : 'Crie sua conta para salvar seu endereço e finalizar pedidos.'}
+            : 'Crie sua conta para salvar seu endereço e finalizar pedidos na MM MODAS.'}
         </p>
       </header>
 
@@ -666,8 +670,8 @@ function Register() {
             <fieldset className="register__types">
               <legend className="sr-only">Tipo de cadastro</legend>
               {[
-                { id: 'cliente', title: 'Sou jogador / cliente', text: 'Quero comprar jogos e acompanhar meus pedidos.' },
-                { id: 'funcionario', title: 'Sou da equipe', text: 'Faço parte da equipe MM GAMES.' },
+                { id: 'cliente', title: 'Sou cliente', text: 'Quero comprar roupas, acessórios e acompanhar meus pedidos.' },
+                { id: 'funcionario', title: 'Sou da equipe', text: 'Faço parte da equipe MM MODAS.' },
               ].map((opt) => (
                 <label key={opt.id} className={`type-option ${form.tipo === opt.id ? 'type-option--active' : ''}`}>
                   <input
@@ -903,7 +907,7 @@ function Register() {
 
         <aside className="register__side">
           <Mascot size={120} title="" />
-          <h2>{isStaff ? 'Bem-vindo à equipe!' : 'Vantagens da guilda'}</h2>
+          <h2>{isStaff ? 'Bem-vindo à equipe!' : 'Vantagens de ter conta'}</h2>
           {isStaff ? (
             <ul>
               <li>Acesso exclusivo com sua matrícula</li>

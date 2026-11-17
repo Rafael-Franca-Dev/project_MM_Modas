@@ -1,5 +1,5 @@
 // =========================================================
-// About — "Nossa história" (/sobre) — MM GAMES
+// About — "Nossa história" (/sobre) — MM MODAS
 // =========================================================
 import { Link } from 'react-router-dom'
 import Mascot from '../../components/Logo/Mascot.jsx'
@@ -8,22 +8,31 @@ import './About.css'
 const story = [
   {
     title: 'A conversa',
-    text: 'Nossa loja nasceu de uma conversa entre amigos na faculdade. Entre uma aula e outra, as sessões de RPG e tabuleiro começaram a virar um projeto de verdade.',
+    text: 'Nossa marca nasceu de uma conversa entre amigos na faculdade. Entre uma aula e outra, percebemos como faltava uma marca de moda masculina que unisse estilo autêntico, caimento moderno e conforto de verdade.',
   },
   {
     title: 'A criatividade',
-    text: 'Foi quando Daniel revelou que sempre teve vontade de exercer sua criatividade com jogos: unir estratégia, narrativa e atitude ao redor da mesa.',
+    text: 'Foi quando Daniel revelou que sempre teve vontade de exercer sua criatividade na moda masculina: desenhar t-shirts, moletons, calças e acessórios que expressassem personalidade e atitude em cada detalhe.',
   },
   {
     title: 'O empreendedorismo',
-    text: 'Essa paixão se juntou com o ímpeto empreendedor dos demais amigos — e assim nasceu a MM GAMES.',
+    text: 'Essa paixão pelo vestuário se juntou com o ímpeto empreendedor dos demais amigos — e assim nasceu a MM MODAS, pensada para o homem que se veste sem rótulos.',
   },
 ]
 
 const values = [
-  { title: 'Sem filtro', text: 'A gente fala de jogador pra jogador. Preço justo, curadoria sincera e zero enrolação.' },
-  { title: 'Cuidado de colecionador', text: 'Caixas embaladas com proteção reforçada pra chegarem intactas na sua estante.' },
-  { title: 'Diversão primeiro', text: 'Dos party games rápidos às campanhas épicas de RPG que duram anos.' },
+  {
+    title: 'Sem filtro',
+    text: 'Moda masculina direta ao ponto: cortes que valorizam o corpo, preço justo, informação clara e zero enrolação.',
+  },
+  {
+    title: 'Qualidade em cada costura',
+    text: 'Do algodão penteado das camisetas à sarja estruturada das calças e jaquetas, escolhemos tecidos feitos para durar.',
+  },
+  {
+    title: 'Conforto primeiro',
+    text: 'Modelagens pensadas para a rotina real — da faculdade e do trabalho ao rolê de fim de semana.',
+  },
 ]
 
 function About() {
@@ -31,18 +40,18 @@ function About() {
     <div className="about">
       <section className="container about__hero">
         <div>
-          <span className="eyebrow">Nossa história</span>
+          <span className="eyebrow">Nossa história · MM MODAS</span>
           <h1>
-            Todo jogador tem um lado <span className="about__accent">Menino Mau</span>.
+            Todo homem de estilo tem um lado <span className="about__accent">Menino Mau</span>.
           </h1>
           <p className="about__lead">
-            Aquele blefe na última rodada ou a jogada que vira a partida de cabeça pra baixo. A MM GAMES é uma loja
-            feita por amigos apaixonados por jogos de mesa, RPG e boas histórias.
+            A gente só resolveu vestir o nosso. A MM MODAS é uma marca de moda masculina feita por amigos, pra quem
+            quer se expressar pela roupa com criatividade, conforto e atitude.
           </p>
         </div>
         <div className="about__portrait" aria-hidden="true">
           <Mascot size={260} title="" />
-          <span className="about__caption">o Menino Mau, mestre oficial da taverna</span>
+          <span className="about__caption">o Menino Mau, ícone oficial da MM MODAS</span>
         </div>
       </section>
 
@@ -76,9 +85,9 @@ function About() {
       </section>
 
       <section className="container about__cta">
-        <h2>Pronto pra começar sua próxima partida?</h2>
+        <h2>Pronto pra mostrar o seu lado Menino Mau?</h2>
         <Link to="/loja" className="btn btn--primary">
-          Explorar o catálogo
+          Ver a coleção
         </Link>
       </section>
     </div>

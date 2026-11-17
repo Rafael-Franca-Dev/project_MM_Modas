@@ -1,5 +1,5 @@
 // =========================================================
-// Cliente HTTP da API MM GAMES (com fallback local transparente)
+// Cliente HTTP da API MM MODAS (com fallback local transparente)
 // ---------------------------------------------------------
 // Conecta o Front-end ao Back-end Spring Boot (http://localhost:8080/api).
 // Se o servidor ou o banco PostgreSQL não estiverem ativos no momento,
@@ -10,12 +10,12 @@ import { calcularFreteLocal, CUPONS, FRETE_GRATIS_A_PARTIR } from '../context/ca
 import { onlyDigits } from '../utils/validators.js'
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8080/api'
-const TOKEN_KEY = 'mm-games:tokens'
-const LOCAL_ACCOUNTS_KEY = 'mm-games:contas-locais'
-const LOCAL_ORDERS_KEY = 'mm-games:pedidos-locais'
-const STAFF_MATRICULAS_KEY = 'mm-games:matriculas-equipe'
-const CUSTOM_CATEGORIES_KEY = 'mm-games:categorias-custom'
-const PRODUCT_OVERRIDES_KEY = 'mm-games:produtos-comercial'
+const TOKEN_KEY = 'mm-modas:tokens'
+const LOCAL_ACCOUNTS_KEY = 'mm-modas:contas-locais'
+const LOCAL_ORDERS_KEY = 'mm-modas:pedidos-locais'
+const STAFF_MATRICULAS_KEY = 'mm-modas:matriculas-equipe'
+const CUSTOM_CATEGORIES_KEY = 'mm-modas:categorias-custom'
+const PRODUCT_OVERRIDES_KEY = 'mm-modas:produtos-comercial'
 
 export function getSavedTokens() {
   try {
@@ -264,8 +264,9 @@ export async function apiValidateCoupon(code) {
 }
 
 // ---------- Catálogo ----------
-const DEFAULT_ARTS = ['d20', 'board', 'chess', 'cards', 'meeple', 'tower', 'rpgbook', 'shield']
+const DEFAULT_ARTS = ['oversized', 'tee', 'polo', 'shirt', 'hoodie', 'sweater', 'jacket', 'pants', 'shorts', 'boxer', 'dryfit', 'cap']
 const DEFAULT_BGS = ['var(--laranja-200)', 'var(--roxo-200)', 'var(--laranja-100)', 'var(--roxo-100)']
+const LEGACY_GAME_SLUGS = new Set(['rpg', 'familia', 'estrategia', 'cartas', 'party'])
 
 export function slugifyCategory(text = '') {
   return text
@@ -327,7 +328,7 @@ export function buildMergedCategories(apiCats = []) {
   if (Array.isArray(apiCats)) {
     apiCats.forEach((ac, idx) => {
       const slug = ac.slug || slugifyCategory(ac.nome)
-      if (slug && !seen.has(slug)) {
+      if (slug && !seen.has(slug) && !LEGACY_GAME_SLUGS.has(slug)) {
         merged.push({
           id: slug,
           name: ac.nome,
@@ -395,7 +396,7 @@ export async function apiFetchCatalog() {
   }
 }
 
-export async function apiCreateCategory({ name, art = 'd20', bg = 'var(--laranja-200)' }) {
+export async function apiCreateCategory({ name, art = 'tee', bg = 'var(--laranja-200)' }) {
   const cleanName = (name || '').trim()
   const slug = slugifyCategory(cleanName)
   if (!cleanName || !slug) {

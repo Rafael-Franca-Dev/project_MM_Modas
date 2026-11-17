@@ -1,5 +1,5 @@
 // =========================================================
-// Header — barra de aviso + cabeçalho fixo do site MM GAMES
+// Header — barra de aviso + cabeçalho fixo do site MM MODAS
 // =========================================================
 import { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
@@ -35,13 +35,13 @@ function Header() {
     <>
       <div className="announcement">
         <p>
-          Frete grátis acima de R$ 299 · Primeira campanha? Use <strong>MENINOMAU10</strong>
+          Frete grátis acima de R$ 299 · Primeira compra na MM MODAS? Use <strong>MENINOMAU10</strong>
         </p>
       </div>
 
       <header className={`header ${scrolled ? 'header--scrolled' : ''}`}>
         <div className="container header__inner">
-          <Link to="/" className="header__logo" onClick={close} aria-label="MM GAMES — página inicial">
+          <Link to="/" className="header__logo" onClick={close} aria-label="MM MODAS — página inicial">
             <Logo size={44} />
           </Link>
 

@@ -1,5 +1,5 @@
 // =========================================================
-// Contact — página de contato (/contato) — MM GAMES
+// Contact — página de contato (/contato) — MM MODAS
 // =========================================================
 import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
@@ -10,10 +10,11 @@ import { isEmail } from '../../utils/validators.js'
 import './Contact.css'
 
 const subjects = [
-  'Dúvida sobre jogo ou RPG',
+  'Dúvida sobre tamanho ou caimento',
+  'Dúvida sobre tecido ou peça',
   'Meu pedido',
-  'Trocas e reposição de peças',
-  'Eventos e parcerias',
+  'Trocas e devoluções',
+  'Parcerias e revenda',
   'Outro assunto',
 ]
 
@@ -46,9 +47,9 @@ function Contact() {
   return (
     <div className="container">
       <header className="page-head">
-        <span className="eyebrow">Fale com a gente</span>
-        <h1>Bora trocar uma ideia?</h1>
-        <p className="muted">Dúvida de regra, recomendação de jogo ou pedido: a gente responde rapidinho.</p>
+        <span className="eyebrow">Fale com a gente · MM MODAS</span>
+        <h1>Bora conversar?</h1>
+        <p className="muted">Dúvida sobre tamanho, tecido, troca de roupa ou pedido: a gente responde rapidinho.</p>
       </header>
 
       <div className="contact">
@@ -135,7 +136,7 @@ function Contact() {
               <WhatsIcon /> <span>WhatsApp<small>(81) 90000-0000</small></span>
             </a>
             <a href="https://instagram.com" target="_blank" rel="noreferrer" className="channel">
-              <InstagramIcon /> <span>Instagram<small>@mm.games</small></span>
+              <InstagramIcon /> <span>Instagram<small>@mm.modas</small></span>
             </a>
           </div>
 

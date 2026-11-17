@@ -1,5 +1,5 @@
 // =========================================================
-// Checkout — finalizar compra (/checkout) — MM GAMES
+// Checkout — finalizar compra (/checkout) — MM MODAS
 // ---------------------------------------------------------
 // Correções estruturais aplicadas:
 //  - Endereço completo (CEP, rua, número, complemento, bairro, cidade, UF)
@@ -64,13 +64,13 @@ function Checkout() {
         <div className="order-ok">
           <Mascot size={150} title="" />
           <span className="eyebrow">Pedido #{orderNumber}</span>
-          <h1>Boa jogada, {form.nome.split(' ')[0]}!</h1>
+          <h1>Boa escolha, {form.nome.split(' ')[0]}!</h1>
           <p className="muted">
-            Seu pedido foi confirmado e os itens já foram reservados. Enviamos os detalhes para{' '}
+            Seu pedido foi confirmado e suas peças já foram separadas. Enviamos os detalhes para{' '}
             <strong>{form.email}</strong>.
           </p>
           <Link to="/loja" className="btn btn--primary">
-            Voltar ao catálogo
+            Voltar à coleção
           </Link>
         </div>
       </div>

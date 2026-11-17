@@ -10,7 +10,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { apiLogin, apiRegister, saveTokens } from '../services/api.js'
 
 const UserContext = createContext(null)
-const STORAGE_KEY = 'mm-games:usuario-sessao'
+const STORAGE_KEY = 'mm-modas:usuario-sessao'
 
 function loadUser() {
   try {
