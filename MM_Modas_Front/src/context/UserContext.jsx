@@ -2,12 +2,10 @@
 // UserContext — sessão do usuário (cliente ou equipe)
 // ---------------------------------------------------------
 // Conecta-se à API Spring Boot (/api/auth/registrar e /api/auth/login)
-// com fallback local automático. Diferente da versão anterior,
-// fazer logout encerra apenas a sessão ativa sem apagar a conta
-// cadastrada, permitindo fazer login novamente a qualquer momento.
+// e sincroniza automaticamente contas locais com o banco PostgreSQL.
 // =========================================================
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { apiLogin, apiRegister, saveTokens } from '../services/api.js'
+import { apiLogin, apiRegister, apiSyncUserSession, getSavedTokens, saveTokens } from '../services/api.js'
 
 const UserContext = createContext(null)
 const STORAGE_KEY = 'mm-modas:usuario-sessao'
@@ -32,6 +30,28 @@ export function UserProvider({ children }) {
       else localStorage.removeItem(STORAGE_KEY)
     } catch {
       /* sem armazenamento: segue em memória */
+    }
+  }, [user])
+
+  // Se houver sessão salva (inclusive criada antes em modo local), sincroniza com o PostgreSQL
+  useEffect(() => {
+    if (!user?.email) return
+    const tokens = getSavedTokens()
+    if (user.origem === 'api' && tokens?.accessToken && user.enderecoId) return
+
+    let active = true
+    apiSyncUserSession(user).then((synced) => {
+      if (!active || !synced) return
+      if (
+        synced.id !== user.id ||
+        synced.origem !== user.origem ||
+        synced.enderecoId !== user.enderecoId
+      ) {
+        setUser(synced)
+      }
+    })
+    return () => {
+      active = false
     }
   }, [user])
 

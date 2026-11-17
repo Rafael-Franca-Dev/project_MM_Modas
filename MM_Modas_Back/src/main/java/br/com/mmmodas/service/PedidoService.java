@@ -1,7 +1,9 @@
 package br.com.mmmodas.service;
 
 import br.com.mmmodas.domain.*;
+import br.com.mmmodas.domain.enums.MetodoPagamento;
 import br.com.mmmodas.domain.enums.StatusCarrinho;
+import br.com.mmmodas.domain.enums.StatusPagamento;
 import br.com.mmmodas.domain.enums.StatusPedido;
 import br.com.mmmodas.exception.RecursoNaoEncontradoException;
 import br.com.mmmodas.exception.RegraDeNegocioException;
@@ -52,6 +54,7 @@ public class PedidoService {
     private final VariacaoRepository variacaoRepository;
     private final CupomRepository cupomRepository;
     private final CarrinhoRepository carrinhoRepository;
+    private final PagamentoRepository pagamentoRepository;
     private final EstoqueService estoqueService;
     private final FreteService freteService;
 
@@ -163,6 +166,8 @@ public class PedidoService {
             estoqueService.baixar(entrada.getKey(), entrada.getValue(), pedido.getId());
         }
 
+        registrarPagamentoInicial(pedido, req.observacoes());
+
         converterCarrinhoDoCliente(clienteId);
 
         log.info("Pedido {} criado para o cliente {} - total R$ {}.",
@@ -249,6 +254,29 @@ public class PedidoService {
     @Transactional(readOnly = true)
     public org.springframework.data.domain.Page<Pedido> listarDoCliente(UUID clienteId, org.springframework.data.domain.Pageable pageable) {
         return pedidoRepository.findByClienteIdOrderByCriadoEmDesc(clienteId, pageable);
+    }
+
+    private void registrarPagamentoInicial(Pedido pedido, String observacoes) {
+        if (pedido.getTotal() == null || pedido.getTotal().compareTo(BigDecimal.ZERO) <= 0) {
+            return;
+        }
+        MetodoPagamento metodo = MetodoPagamento.PIX;
+        if (observacoes != null) {
+            String obsLower = observacoes.toLowerCase();
+            if (obsLower.contains("cartao") || obsLower.contains("cartão") || obsLower.contains("credito")) {
+                metodo = MetodoPagamento.CARTAO_CREDITO;
+            } else if (obsLower.contains("boleto")) {
+                metodo = MetodoPagamento.BOLETO;
+            }
+        }
+        Pagamento pagamento = new Pagamento();
+        pagamento.setPedido(pedido);
+        pagamento.setMetodo(metodo);
+        pagamento.setStatus(StatusPagamento.PENDENTE);
+        pagamento.setValor(pedido.getTotal());
+        pagamento.setParcelas(1);
+        pagamento.setProvider("CHECKOUT_DIRETO");
+        pagamentoRepository.save(pagamento);
     }
 
     private void converterCarrinhoDoCliente(UUID clienteId) {

@@ -95,7 +95,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(corsProperties.allowedOrigins());
+        List<String> patterns = new java.util.ArrayList<>(corsProperties.allowedOrigins());
+        patterns.add("http://localhost:*");
+        patterns.add("http://127.0.0.1:*");
+        config.setAllowedOriginPatterns(patterns);
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept", "X-Idempotency-Key"));
         config.setAllowCredentials(true);

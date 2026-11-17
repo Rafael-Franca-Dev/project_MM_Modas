@@ -13,6 +13,7 @@ import { Link, Navigate } from 'react-router-dom'
 import Mascot from '../../components/Logo/Mascot.jsx'
 import FormField from '../../components/FormField/FormField.jsx'
 import { useCart } from '../../context/CartContext.jsx'
+import { useCatalog } from '../../context/CatalogContext.jsx'
 import { useUser } from '../../context/UserContext.jsx'
 import { formatPrice } from '../../utils/format.js'
 import { maskCep, isCep, isEmail, fetchAddressByCep, UFS } from '../../utils/validators.js'
@@ -27,6 +28,7 @@ const paymentOptions = [
 
 function Checkout() {
   const { items, subtotal, discount, shipping, total, coupon, count, clearCart, setShippingUf } = useCart()
+  const { refreshCatalog } = useCatalog()
   const { user, updateUserAddress } = useUser()
   const cepRequestRef = useRef(0)
 
@@ -153,6 +155,9 @@ function Checkout() {
         idempotencyKey,
       })
       updateUserAddress({
+        ...(pedido.syncedUser || {}),
+        ...(pedido.enderecoId ? { enderecoId: pedido.enderecoId } : {}),
+        ...(pedido.origem ? { origem: pedido.origem } : {}),
         cep: form.cep,
         endereco: form.endereco,
         numero: form.numero,
@@ -161,6 +166,7 @@ function Checkout() {
         cidade: form.cidade,
         uf: form.uf,
       })
+      refreshCatalog()
       setOrderNumber(pedido.numero)
       clearCart()
     } catch (error) {

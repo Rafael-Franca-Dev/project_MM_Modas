@@ -1,9 +1,9 @@
 // =========================================================
-// Cliente HTTP da API MM MODAS (com fallback local transparente)
+// Cliente HTTP da API MM MODAS (com sincronização automática e fallback local)
 // ---------------------------------------------------------
 // Conecta o Front-end ao Back-end Spring Boot (http://localhost:8080/api).
-// Se o servidor ou o banco PostgreSQL não estiverem ativos no momento,
-// todas as operações continuam funcionando via fallback local.
+// Sincroniza automaticamente contas e pedidos com o banco PostgreSQL (Neon),
+// mantendo fallback local caso o servidor Java esteja desligado.
 // =========================================================
 import { products as localProducts, categories as localCategories } from '../data/products.js'
 import { calcularFreteLocal, CUPONS, FRETE_GRATIS_A_PARTIR } from '../context/cartConfig.js'
@@ -35,14 +35,15 @@ export function saveTokens(tokens) {
   }
 }
 
-async function request(path, options = {}, timeoutMs = 2800) {
+async function rawFetch(path, options = {}, timeoutMs = 15000, accessTokenOverride = null) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
   const tokens = getSavedTokens()
+  const bearer = accessTokenOverride ?? tokens?.accessToken
 
   const headers = {
     'Content-Type': 'application/json',
-    ...(tokens?.accessToken ? { Authorization: `Bearer ${tokens.accessToken}` } : {}),
+    ...(bearer ? { Authorization: `Bearer ${bearer}` } : {}),
     ...options.headers,
   }
 
@@ -71,7 +72,44 @@ async function request(path, options = {}, timeoutMs = 2800) {
   }
 }
 
-// ---------- Contas locais (Fallback quando a API está offline) ----------
+async function tryRefreshAccessToken() {
+  const tokens = getSavedTokens()
+  if (!tokens?.refreshToken) return null
+  try {
+    const res = await rawFetch(
+      '/auth/refresh',
+      {
+        method: 'POST',
+        body: JSON.stringify({ refreshToken: tokens.refreshToken }),
+      },
+      10000,
+    )
+    if (res?.accessToken) {
+      saveTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken })
+      return res.accessToken
+    }
+    return null
+  } catch {
+    saveTokens(null)
+    return null
+  }
+}
+
+async function request(path, options = {}, timeoutMs = 15000) {
+  try {
+    return await rawFetch(path, options, timeoutMs)
+  } catch (err) {
+    if (err.status === 401 && !path.startsWith('/auth/')) {
+      const newAccess = await tryRefreshAccessToken()
+      if (newAccess) {
+        return await rawFetch(path, options, timeoutMs, newAccess)
+      }
+    }
+    throw err
+  }
+}
+
+// ---------- Contas locais (Backup e sincronização com a API) ----------
 function loadLocalAccounts() {
   try {
     const saved = localStorage.getItem(LOCAL_ACCOUNTS_KEY)
@@ -87,6 +125,19 @@ function saveLocalAccounts(accounts) {
     localStorage.setItem(LOCAL_ACCOUNTS_KEY, JSON.stringify(accounts))
   } catch {
     /* sem armazenamento */
+  }
+}
+
+function upsertLocalAccount(record) {
+  if (!record?.email) return
+  const emailLower = record.email.trim().toLowerCase()
+  const accounts = loadLocalAccounts()
+  const existingIdx = accounts.findIndex((a) => a.email?.toLowerCase() === emailLower)
+  if (existingIdx >= 0) {
+    accounts[existingIdx] = { ...accounts[existingIdx], ...record, email: emailLower }
+    saveLocalAccounts(accounts)
+  } else {
+    saveLocalAccounts([...accounts, { ...record, email: emailLower }])
   }
 }
 
@@ -122,7 +173,7 @@ function normalizeBackendUser(usuario, extra = {}) {
     cpf: usuario.cpf ?? extra.cpf ?? '',
     telefone: usuario.telefone ?? extra.telefone ?? '',
     matricula,
-    enderecoId: end?.id ?? null,
+    enderecoId: end?.id ?? extra.enderecoId ?? null,
     cep: end?.cep ?? extra.cep ?? '',
     endereco: end?.logradouro ?? extra.endereco ?? '',
     numero: end?.numero ?? extra.numero ?? '',
@@ -135,36 +186,53 @@ function normalizeBackendUser(usuario, extra = {}) {
   }
 }
 
-// ---------- Autenticação ----------
-export async function apiRegister(formData) {
-  const cpfDigits = onlyDigits(formData.cpf || '')
-  const cepDigits = onlyDigits(formData.cep || '')
-  const isStaff = formData.tipo === 'funcionario'
+function buildRegisterPayload(source, deliveryFallback = null) {
+  const cpfDigits = onlyDigits(source.cpf || '')
+  const cepDigits = onlyDigits(source.cep || deliveryFallback?.cep || '')
+  const isStaff = source.tipo === 'funcionario'
+  const logradouro = (source.endereco || deliveryFallback?.endereco || '').trim()
+  const numero = (source.numero || deliveryFallback?.numero || '').trim()
+  const bairro = (source.bairro || deliveryFallback?.bairro || '').trim()
+  const cidade = (source.cidade || deliveryFallback?.cidade || '').trim()
+  const uf = (source.uf || deliveryFallback?.uf || '').trim().toUpperCase()
+  const hasValidAddress = cepDigits.length === 8 && logradouro && numero && bairro && cidade && uf.length === 2
 
+  return {
+    nome: (source.nome || deliveryFallback?.nome || 'Cliente MM Modas').trim(),
+    email: source.email.trim().toLowerCase(),
+    senha:
+      source.senha && source.senha.length >= 9
+        ? source.senha
+        : 'MmModas#Forte9',
+    cpf: cpfDigits.length === 11 ? cpfDigits : null,
+    telefone: source.telefone || '(81) 99999-9999',
+    matricula: isStaff && source.matricula ? source.matricula.trim() : null,
+    endereco: hasValidAddress
+      ? {
+          apelido: 'Principal',
+          destinatario: (source.nome || deliveryFallback?.nome || 'Cliente MM Modas').trim(),
+          cep: cepDigits,
+          logradouro,
+          numero,
+          complemento: (source.complemento ?? deliveryFallback?.complemento)?.trim() || null,
+          bairro,
+          cidade,
+          uf,
+          principal: true,
+        }
+      : null,
+  }
+}
+
+// ---------- Autenticação e Sincronização ----------
+export async function apiRegister(formData) {
+  const isStaff = formData.tipo === 'funcionario'
   if (isStaff && formData.matricula) {
     saveStaffMatricula(formData.email, formData.matricula)
   }
 
-  const payload = {
-    nome: formData.nome.trim(),
-    email: formData.email.trim().toLowerCase(),
-    senha: formData.senha,
-    cpf: cpfDigits.length === 11 ? cpfDigits : null,
-    telefone: formData.telefone,
-    matricula: isStaff ? formData.matricula : null,
-    endereco: {
-      apelido: 'Principal',
-      destinatario: formData.nome.trim(),
-      cep: cepDigits,
-      logradouro: formData.endereco.trim(),
-      numero: formData.numero.trim(),
-      complemento: formData.complemento?.trim() || null,
-      bairro: formData.bairro.trim(),
-      cidade: formData.cidade.trim(),
-      uf: formData.uf.trim().toUpperCase(),
-      principal: true,
-    },
-  }
+  const { confirmarSenha: _confirmarSenha, ...localRecord } = formData
+  const payload = buildRegisterPayload(formData)
 
   try {
     const res = await request('/auth/registrar', {
@@ -172,20 +240,37 @@ export async function apiRegister(formData) {
       body: JSON.stringify(payload),
     })
     saveTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken })
-    return normalizeBackendUser(res.usuario, formData)
+    const apiUser = normalizeBackendUser(res.usuario, formData)
+    upsertLocalAccount({ ...localRecord, ...apiUser, senha: formData.senha, origem: 'api' })
+    return apiUser
   } catch (err) {
+    // Se já existe no banco com a mesma senha, faz login transparente
+    if (err.status === 409 && formData.senha) {
+      try {
+        const loginRes = await request('/auth/login', {
+          method: 'POST',
+          body: JSON.stringify({ email: payload.email, senha: formData.senha }),
+        })
+        saveTokens({ accessToken: loginRes.accessToken, refreshToken: loginRes.refreshToken })
+        const apiUser = normalizeBackendUser(loginRes.usuario, formData)
+        upsertLocalAccount({ ...localRecord, ...apiUser, senha: formData.senha, origem: 'api' })
+        return apiUser
+      } catch {
+        throw err
+      }
+    }
+
     if (err.isHttpError) throw err
 
-    // Fallback local se o servidor Spring Boot estiver desligado
+    // Fallback local apenas se o servidor Spring Boot estiver realmente desligado
     const accounts = loadLocalAccounts()
     const emailLower = formData.email.trim().toLowerCase()
     if (accounts.some((a) => a.email.toLowerCase() === emailLower)) {
       throw new Error('Já existe uma conta cadastrada com este e-mail.')
     }
 
-    const { confirmarSenha: _confirmarSenha, ...record } = formData
     const newAccount = {
-      ...record,
+      ...localRecord,
       id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
       email: emailLower,
       criadoEm: new Date().toISOString(),
@@ -199,24 +284,103 @@ export async function apiRegister(formData) {
 
 export async function apiLogin(email, senha) {
   const emailLower = email.trim().toLowerCase()
+  const accounts = loadLocalAccounts()
+  const localFound = accounts.find((a) => a.email.toLowerCase() === emailLower && a.senha === senha)
+
   try {
     const res = await request('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email: emailLower, senha }),
     })
     saveTokens({ accessToken: res.accessToken, refreshToken: res.refreshToken })
-    return normalizeBackendUser(res.usuario)
+    const apiUser = normalizeBackendUser(res.usuario, localFound || {})
+    upsertLocalAccount({ ...(localFound || {}), ...apiUser, senha, origem: 'api' })
+    return apiUser
   } catch (err) {
+    // Se a conta foi criada em modo offline no localStorage e ainda não existe no banco,
+    // sincroniza automaticamente registrando-a no PostgreSQL agora:
+    if (err.status === 401 && localFound) {
+      try {
+        const payload = buildRegisterPayload(localFound)
+        const regRes = await request('/auth/registrar', {
+          method: 'POST',
+          body: JSON.stringify(payload),
+        })
+        saveTokens({ accessToken: regRes.accessToken, refreshToken: regRes.refreshToken })
+        const apiUser = normalizeBackendUser(regRes.usuario, localFound)
+        upsertLocalAccount({ ...localFound, ...apiUser, senha, origem: 'api' })
+        return apiUser
+      } catch (regErr) {
+        if (regErr.isHttpError) throw err
+      }
+    }
+
     if (err.isHttpError) throw err
 
-    // Fallback local
-    const accounts = loadLocalAccounts()
-    const found = accounts.find((a) => a.email.toLowerCase() === emailLower && a.senha === senha)
-    if (!found) {
+    // Fallback local quando servidor está desligado
+    if (!localFound) {
       throw new Error('E-mail ou senha inválidos.')
     }
-    const { senha: _senha, ...safeUser } = found
+    const { senha: _senha, ...safeUser } = localFound
     return safeUser
+  }
+}
+
+/**
+ * Garante que um usuário logado (mesmo que tenha sido criado antes em modo local)
+ * esteja salvo e autenticado no banco PostgreSQL quando o Back-end estiver ativo.
+ */
+export async function apiSyncUserSession(user, deliveryFallback = null) {
+  if (!user?.email) return null
+
+  const emailLower = user.email.trim().toLowerCase()
+  const localAcc = loadLocalAccounts().find((a) => a.email?.toLowerCase() === emailLower)
+  const mergedSource = { ...(localAcc || {}), ...user }
+
+  // 1. Se já temos tokens salvos, verifica se a sessão na API continua válida
+  const tokens = getSavedTokens()
+  if (tokens?.accessToken) {
+    try {
+      const me = await request('/auth/me', { method: 'GET' })
+      if (me?.email?.toLowerCase() === emailLower) {
+        const synced = normalizeBackendUser(me, mergedSource)
+        upsertLocalAccount({ ...mergedSource, ...synced, origem: 'api' })
+        return synced
+      }
+    } catch {
+      /* token expirado ou de outro banco: segue para login/registro */
+    }
+  }
+
+  // 2. Tenta autenticar com a senha salva localmente
+  const candidatePassword = mergedSource.senha || 'MmModas#Forte9'
+  try {
+    const loginRes = await request('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email: emailLower, senha: candidatePassword }),
+    })
+    saveTokens({ accessToken: loginRes.accessToken, refreshToken: loginRes.refreshToken })
+    const synced = normalizeBackendUser(loginRes.usuario, mergedSource)
+    upsertLocalAccount({ ...mergedSource, ...synced, senha: candidatePassword, origem: 'api' })
+    return synced
+  } catch (loginErr) {
+    // 3. Se não existe no banco (401), registra automaticamente no PostgreSQL
+    if (loginErr.status === 401) {
+      try {
+        const payload = buildRegisterPayload({ ...mergedSource, senha: candidatePassword }, deliveryFallback)
+        const regRes = await request('/auth/registrar', {
+          method: 'POST',
+          body: JSON.stringify(payload),
+        })
+        saveTokens({ accessToken: regRes.accessToken, refreshToken: regRes.refreshToken })
+        const synced = normalizeBackendUser(regRes.usuario, mergedSource)
+        upsertLocalAccount({ ...mergedSource, ...synced, senha: candidatePassword, origem: 'api' })
+        return synced
+      } catch {
+        return user
+      }
+    }
+    return user
   }
 }
 
@@ -476,56 +640,98 @@ export async function apiUpdateProductCommercial(slug, { price, oldPrice, stock,
   return overrides[slug]
 }
 
-// ---------- Pedidos (Checkout) ----------
-export async function apiCreateOrder({ user, items, couponCode, delivery, idempotencyKey }) {
-  const tokens = getSavedTokens()
-  const canCallApi = Boolean(tokens?.accessToken && user?.origem === 'api')
+// ---------- Pedidos (Checkout e Histórico) ----------
+async function createDeliveryAddressInApi(delivery) {
+  const endRes = await request('/enderecos', {
+    method: 'POST',
+    body: JSON.stringify({
+      apelido: 'Entrega',
+      destinatario: delivery.nome.trim(),
+      cep: onlyDigits(delivery.cep),
+      logradouro: delivery.endereco.trim(),
+      numero: delivery.numero.trim(),
+      complemento: delivery.complemento?.trim() || null,
+      bairro: delivery.bairro.trim(),
+      cidade: delivery.cidade.trim(),
+      uf: delivery.uf.trim().toUpperCase(),
+      principal: true,
+    }),
+  })
+  return endRes.id
+}
 
-  if (canCallApi) {
+export async function apiCreateOrder({ user, items, couponCode, delivery, idempotencyKey }) {
+  // 1. Garante que o usuário esteja sincronizado e autenticado no Back-end
+  let activeUser = user
+  let tokens = getSavedTokens()
+  if (!tokens?.accessToken || user?.origem !== 'api' || !user?.enderecoId) {
+    activeUser = (await apiSyncUserSession(user, delivery)) || user
+    tokens = getSavedTokens()
+  }
+
+  if (tokens?.accessToken) {
     try {
-      let enderecoId = user.enderecoId
-      if (!enderecoId) {
-        const endRes = await request('/enderecos', {
-          method: 'POST',
-          body: JSON.stringify({
-            apelido: 'Entrega',
-            destinatario: delivery.nome.trim(),
-            cep: onlyDigits(delivery.cep),
-            logradouro: delivery.endereco.trim(),
-            numero: delivery.numero.trim(),
-            complemento: delivery.complemento?.trim() || null,
-            bairro: delivery.bairro.trim(),
-            cidade: delivery.cidade.trim(),
-            uf: delivery.uf.trim().toUpperCase(),
-            principal: true,
-          }),
-        })
-        enderecoId = endRes.id
+      let enderecoId = activeUser?.enderecoId
+      const deliveryChanged =
+        onlyDigits(delivery.cep) !== onlyDigits(activeUser?.cep || '') ||
+        delivery.endereco.trim() !== (activeUser?.endereco || '').trim() ||
+        delivery.numero.trim() !== (activeUser?.numero || '').trim()
+
+      if (!enderecoId || deliveryChanged) {
+        enderecoId = await createDeliveryAddressInApi(delivery)
       }
 
       const itensApi = items
-        .filter((i) => Boolean(i.variacaoId))
-        .map((i) => ({ variacaoId: i.variacaoId, quantidade: i.qty }))
+        .map((i) => {
+          const variacaoId =
+            i.variacaoId ||
+            localProducts.find((lp) => lp.id === i.id || lp.slug === i.slug)?.variacaoId
+          return variacaoId ? { variacaoId, quantidade: i.qty } : null
+        })
+        .filter(Boolean)
 
       if (itensApi.length === items.length) {
-        const pedido = await request('/pedidos', {
-          method: 'POST',
-          body: JSON.stringify({
-            enderecoId,
-            itens: itensApi,
-            cupomCodigo: couponCode || null,
-            idempotencyKey,
-            observacoes: `Pagamento escolhido: ${delivery.pagamento}`,
-          }),
-        })
-        return { numero: pedido.numero, id: pedido.id, origem: 'api' }
+        const orderPayload = {
+          enderecoId,
+          itens: itensApi,
+          cupomCodigo: couponCode || null,
+          idempotencyKey,
+          observacoes: `Pagamento escolhido: ${delivery.pagamento}`,
+        }
+
+        let pedido
+        try {
+          pedido = await request('/pedidos', {
+            method: 'POST',
+            body: JSON.stringify(orderPayload),
+          })
+        } catch (orderErr) {
+          // Se o enderecoId antigo não existir no banco, cria o endereço agora e repete
+          if (orderErr.code === 'ENDERECO_INVALIDO' || orderErr.status === 404) {
+            enderecoId = await createDeliveryAddressInApi(delivery)
+            pedido = await request('/pedidos', {
+              method: 'POST',
+              body: JSON.stringify({ ...orderPayload, enderecoId }),
+            })
+          } else {
+            throw orderErr
+          }
+        }
+
+        return {
+          numero: pedido.numero,
+          id: pedido.id,
+          enderecoId,
+          syncedUser: { ...activeUser, enderecoId, origem: 'api' },
+          origem: 'api',
+        }
       }
     } catch (err) {
       if (err.isHttpError) throw err
     }
   }
 
-  // Fallback local: grava pedido no localStorage respeitando idempotência
+  // Fallback local: grava pedido no localStorage apenas se o servidor estiver offline
   try {
     const saved = JSON.parse(localStorage.getItem(LOCAL_ORDERS_KEY) || '[]')
     const existing = saved.find((o) => o.idempotencyKey === idempotencyKey)
@@ -548,3 +754,13 @@ export async function apiCreateOrder({ user, items, couponCode, delivery, idempo
   }
 }
 
+export async function apiFetchMyOrders() {
+  const tokens = getSavedTokens()
+  if (!tokens?.accessToken) return []
+  try {
+    const page = await request('/pedidos', { method: 'GET' })
+    return Array.isArray(page?.content) ? page.content : []
+  } catch {
+    return []
+  }
+}

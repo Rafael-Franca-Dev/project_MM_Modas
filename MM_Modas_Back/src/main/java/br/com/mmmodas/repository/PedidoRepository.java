@@ -16,10 +16,16 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
 
     Optional<Pedido> findByNumero(String numero);
 
-    Optional<Pedido> findByIdempotencyKey(String idempotencyKey);
+    @Query("""
+            select distinct p from Pedido p
+              left join fetch p.itens i
+              left join fetch i.variacao
+             where p.idempotencyKey = :idempotencyKey
+            """)
+    Optional<Pedido> findByIdempotencyKey(@Param("idempotencyKey") String idempotencyKey);
 
     @Query(
-            value = "select distinct p from Pedido p left join fetch p.itens i where p.cliente.id = :clienteId order by p.criadoEm desc",
+            value = "select distinct p from Pedido p left join fetch p.itens i left join fetch i.variacao where p.cliente.id = :clienteId order by p.criadoEm desc",
             countQuery = "select count(p) from Pedido p where p.cliente.id = :clienteId"
     )
     Page<Pedido> findByClienteIdOrderByCriadoEmDesc(@Param("clienteId") UUID clienteId, Pageable pageable);
@@ -27,6 +33,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
     @Query("""
             select distinct p from Pedido p
               left join fetch p.itens i
+              left join fetch i.variacao
              where p.id = :id
             """)
     Optional<Pedido> buscarComItens(@Param("id") UUID id);
@@ -34,6 +41,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, UUID> {
     @Query("""
             select distinct p from Pedido p
               left join fetch p.itens i
+              left join fetch i.variacao
              where p.numero = :numero
             """)
     Optional<Pedido> buscarComItensPorNumero(@Param("numero") String numero);
